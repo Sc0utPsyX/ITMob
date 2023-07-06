@@ -1,3 +1,5 @@
+//wow!
+
 (function () {
     angular
         .module('socialnetwork', ['ngRoute', 'ngStorage'])
