@@ -1,4 +1,3 @@
-//testcommit
 (function () {
     angular
         .module('socialnetwork', ['ngRoute', 'ngStorage'])
