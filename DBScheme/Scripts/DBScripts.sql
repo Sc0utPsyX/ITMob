@@ -23,6 +23,7 @@ CREATE  TABLE itmob.user_right_types (
 
 CREATE  TABLE itmob.users ( 
 	id                   bigserial  NOT NULL  ,
+	right_id             int  NOT NULL  ,
 	login                varchar(100)  NOT NULL  ,
 	"password"           varchar(100)  NOT NULL  ,
 	displayname          varchar(100)  NOT NULL  ,
@@ -39,14 +40,14 @@ CREATE  TABLE itmob.events (
 	event                varchar(250)  NOT NULL  ,
 	description          text  NOT NULL  ,
 	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
-	owner_id             bigserial  NOT NULL  ,
+	owner_id             bigint  NOT NULL  ,
 	event_date           date  NOT NULL  ,
-	event_type           serial  NOT NULL  ,
-	CONSTRAINT pk_topics PRIMARY KEY ( id )
+	event_type           int  NOT NULL  ,
+	CONSTRAINT pk_events PRIMARY KEY ( id )
  );
 
 CREATE  TABLE itmob.user_details ( 
-	user_id              bigserial  NOT NULL  ,
+	user_id              bigint  NOT NULL  ,
 	about                varchar(4000)    ,
 	address              varchar(1000)    ,
 	city                 varchar(255)    ,
@@ -58,26 +59,20 @@ CREATE  TABLE itmob.user_details (
 
 CREATE  TABLE itmob.user_messages ( 
 	id                   bigserial  NOT NULL  ,
-	recipient_id         bigserial  NOT NULL  ,
-	sender_id            bigserial  NOT NULL  ,
+	recipient_id         bigint  NOT NULL  ,
+	sender_id            bigint  NOT NULL  ,
 	message              varchar(4000)  NOT NULL  ,
 	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
 	CONSTRAINT pk_user_sent_messages PRIMARY KEY ( id )
  );
 
-CREATE  TABLE itmob.user_rights ( 
-	user_id              bigserial  NOT NULL  ,
-	right_id             serial  NOT NULL  ,
-	CONSTRAINT pk_user_rights PRIMARY KEY ( user_id )
- );
-
 CREATE  TABLE itmob.event_comments ( 
 	id                   bigserial  NOT NULL  ,
-	event_id             bigserial  NOT NULL  ,
+	event_id             bigint  NOT NULL  ,
 	"comment"            varchar(4000)  NOT NULL  ,
 	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
-	owner_id             bigserial  NOT NULL  ,
-	parent_id            bigserial    ,
+	owner_id             bigint  NOT NULL  ,
+	parent_id            bigint    ,
 	CONSTRAINT pk_event_comments PRIMARY KEY ( id )
  );
 
@@ -90,8 +85,8 @@ CREATE  TABLE itmob.event_location (
  );
 
 CREATE  TABLE itmob.event_members ( 
-	event_id             bigserial  NOT NULL  ,
-	user_id              bigserial  NOT NULL  ,
+	event_id             bigint  NOT NULL  ,
+	user_id              bigint  NOT NULL  ,
 	CONSTRAINT pk_event_members PRIMARY KEY ( event_id, user_id )
  );
 
@@ -105,7 +100,7 @@ ALTER TABLE itmob.event_members ADD CONSTRAINT fk_event_member_id FOREIGN KEY ( 
 
 ALTER TABLE itmob.event_members ADD CONSTRAINT fk_event_members_event FOREIGN KEY ( event_id ) REFERENCES itmob.events( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.events ADD CONSTRAINT fk_topics_user_id FOREIGN KEY ( owner_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.events ADD CONSTRAINT fk_event_user_id FOREIGN KEY ( owner_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE itmob.events ADD CONSTRAINT fk_event_type_id FOREIGN KEY ( event_type ) REFERENCES itmob.event_types( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
@@ -115,9 +110,7 @@ ALTER TABLE itmob.user_messages ADD CONSTRAINT fk_user_messages_users_recipient 
 
 ALTER TABLE itmob.user_messages ADD CONSTRAINT fk_user_messages_users_sender FOREIGN KEY ( sender_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.user_rights ADD CONSTRAINT fk_user_rights_users FOREIGN KEY ( user_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE itmob.user_rights ADD CONSTRAINT fk_user_right_id FOREIGN KEY ( right_id ) REFERENCES itmob.user_right_types( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.users ADD CONSTRAINT fk_user_right_id FOREIGN KEY ( right_id ) REFERENCES itmob.user_right_types( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 COMMENT ON CONSTRAINT fk_event_comments_owner_id ON itmob.event_comments IS 'Владелец комментария';
 
@@ -127,7 +120,7 @@ COMMENT ON CONSTRAINT fk_event_member_id ON itmob.event_members IS 'Участн
 
 COMMENT ON CONSTRAINT fk_event_members_event ON itmob.event_members IS 'Событие';
 
-COMMENT ON CONSTRAINT fk_topics_user_id ON itmob.events IS 'Идентификатор пользователя (владельца)';
+COMMENT ON CONSTRAINT fk_event_user_id ON itmob.events IS 'Идентификатор пользователя (владельца)';
 
 COMMENT ON CONSTRAINT fk_event_type_id ON itmob.events IS 'Тип события';
 
@@ -136,10 +129,6 @@ COMMENT ON CONSTRAINT fk_user_details_users ON itmob.user_details IS 'Идент
 COMMENT ON CONSTRAINT fk_user_messages_users_recipient ON itmob.user_messages IS 'Получатель сообщения';
 
 COMMENT ON CONSTRAINT fk_user_messages_users_sender ON itmob.user_messages IS 'Отправитель сообщения';
-
-COMMENT ON CONSTRAINT fk_user_rights_users ON itmob.user_rights IS 'Идентификатор пользователя';
-
-COMMENT ON CONSTRAINT fk_user_right_id ON itmob.user_rights IS 'Идентификатор права';
 
 COMMENT ON DOMAIN itmob.gender IS 'Пол пользователя';
 
@@ -172,6 +161,8 @@ COMMENT ON CONSTRAINT unq_users ON itmob.users IS 'Уникальный логи
 COMMENT ON TABLE itmob.users IS 'Таблица пользователей';
 
 COMMENT ON COLUMN itmob.users.id IS 'Уникальный идентификатор пользователя';
+
+COMMENT ON COLUMN itmob.users.right_id IS 'Идентификатор права';
 
 COMMENT ON COLUMN itmob.users.login IS 'Логин пользователя';
 
@@ -232,12 +223,6 @@ COMMENT ON COLUMN itmob.user_messages.sender_id IS 'Отправитель со�
 COMMENT ON COLUMN itmob.user_messages.message IS 'Текст сообщения';
 
 COMMENT ON COLUMN itmob.user_messages.create_date IS 'Дата создания сообщения';
-
-COMMENT ON TABLE itmob.user_rights IS 'Описание прав пользователей';
-
-COMMENT ON COLUMN itmob.user_rights.user_id IS 'Идентификатор пользователя';
-
-COMMENT ON COLUMN itmob.user_rights.right_id IS 'Идентификатор права';
 
 COMMENT ON TABLE itmob.event_comments IS 'Комментарии к событиям';
 
