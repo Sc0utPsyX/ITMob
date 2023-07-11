@@ -42,7 +42,7 @@ public class User {
     private List<Right> rights;
 
     @Column(name = "create_date")
-//    @CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime createDate;
 
     @Column(name = "register_date")

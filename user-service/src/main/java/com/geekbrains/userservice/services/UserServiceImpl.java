@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .setUsername(login)
                 .setUserDetails(null)
                 .setRights(rights)
-                .setCreateDate(LocalDateTime.of(1970,1,1,1,1)) //db-backed
+                .setCreateDate(null) //db-backed
                 .setRegisterDate(null) //@CreationTimestamp or LocalDateTime.now()
                 .setActive(true)
                 .build();

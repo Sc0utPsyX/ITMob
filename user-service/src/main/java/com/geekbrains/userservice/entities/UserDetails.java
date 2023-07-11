@@ -21,11 +21,6 @@ public class UserDetails {
     @Column(name = "user_id")
     private Long userId;
 
-//    @OneToOne
-////    @PrimaryKeyJoinColumn
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
     @Column(name = "about")
     private String about;
 
@@ -57,11 +52,6 @@ public class UserDetails {
             UserDetails.this.userId = userId;
             return this;
         }
-
-//        public UserDetails.Builder setUser(User user) {
-//            UserDetails.this.user = user;
-//            return this;
-//        }
 
         public UserDetails.Builder setAbout(String about) {
             UserDetails.this.about = about;
