@@ -1,23 +1,17 @@
 package com.geekbrains.userservice.controllers;
 
-import com.geekbrains.userservice.entities.User;
-import com.geekbrains.userservice.mappers.UserDetailsMapper;
-import com.geekbrains.userservice.mappers.UserMapper;
-import com.geekbrains.userservice.models.*;
-import com.geekbrains.userservice.repositories.UserDetailsRepository;
-import com.geekbrains.userservice.repositories.UserRepository;
+import com.geekbrains.userservice.models.AuthRequest;
+import com.geekbrains.userservice.models.AuthResponse;
+import com.geekbrains.userservice.models.UserDto;
+import com.geekbrains.userservice.models.UserRegReq;
 import com.geekbrains.userservice.security.JwtUtility;
 import com.geekbrains.userservice.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

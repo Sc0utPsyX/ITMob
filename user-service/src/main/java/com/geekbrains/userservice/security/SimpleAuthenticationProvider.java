@@ -1,7 +1,6 @@
 package com.geekbrains.userservice.security;
 
 import com.geekbrains.userservice.services.UserDetailsService;
-import com.geekbrains.userservice.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
