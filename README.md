@@ -1,2 +1,0 @@
-# ITMob
-IT Social Network

@@ -1,0 +1,94 @@
+Index: src/main/resources/application.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server:\n  port: 8194\n  servlet:\n    context-path: /event\nspring:\n  datasource:\n    driver-class-name: org.h2.Driver\n    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL\n    username: sa\n    password:\n  jpa:\n    show-sql: true\n    properties:\n      hibernate:\n        dialect: org.hibernate.dialect.H2Dialect\n  h2:\n    console:\n      enabled: true\n      settings:\n        web-allow-others: false\n
+===================================================================
+diff --git a/src/main/resources/application.yaml b/src/main/resources/application.yaml
+--- a/src/main/resources/application.yaml	
++++ b/src/main/resources/application.yaml	
+@@ -1,5 +1,5 @@
+ server:
+-  port: 8194
++  port: 8193
+   servlet:
+     context-path: /event
+ spring:
+Index: src/main/resources/static/events.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nangular.module('app', []).controller('eventsController', function ($scope, $http) {\r\n\r\n    $scope.loadEvents = function () {\r\n        $http.get('http://localhost:8194/event/api/v1/events').then(function (response) {\r\n            $scope.eventsList = response.data;\r\n            console.log(response.data);\r\n        });\r\n    }\r\n\r\n    $scope.showEventInfo = function (eventId) {\r\n        $http.get('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {\r\n            alert(response.data.description);\r\n        });\r\n    }\r\n\r\n    $scope.deleteEventById = function (eventId) {\r\n        $http.delete('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {\r\n            $scope.loadEvents();\r\n        });\r\n    }\r\n\r\n    $scope.loadEvents();\r\n\r\n});\r\n
+===================================================================
+diff --git a/src/main/resources/static/events.js b/src/main/resources/static/events.js
+--- a/src/main/resources/static/events.js	
++++ b/src/main/resources/static/events.js	
+@@ -2,20 +2,20 @@
+ angular.module('app', []).controller('eventsController', function ($scope, $http) {
+ 
+     $scope.loadEvents = function () {
+-        $http.get('http://localhost:8194/event/api/v1/events').then(function (response) {
++        $http.get('http://localhost:8193/event/api/v1/events').then(function (response) {
+             $scope.eventsList = response.data;
+             console.log(response.data);
+         });
+     }
+ 
+     $scope.showEventInfo = function (eventId) {
+-        $http.get('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {
++        $http.get('http://localhost:8193/event/api/v1/events/' + eventId).then(function (response) {
+             alert(response.data.description);
+         });
+     }
+ 
+     $scope.deleteEventById = function (eventId) {
+-        $http.delete('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {
++        $http.delete('http://localhost:8193/event/api/v1/events/' + eventId).then(function (response) {
+             $scope.loadEvents();
+         });
+     }
+Index: target/classes/application.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server:\n  port: 8194\n  servlet:\n    context-path: /event\nspring:\n  datasource:\n    driver-class-name: org.h2.Driver\n    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL\n    username: sa\n    password:\n  jpa:\n    show-sql: true\n    properties:\n      hibernate:\n        dialect: org.hibernate.dialect.H2Dialect\n  h2:\n    console:\n      enabled: true\n      settings:\n        web-allow-others: false\n
+===================================================================
+diff --git a/target/classes/application.yaml b/target/classes/application.yaml
+--- a/target/classes/application.yaml	
++++ b/target/classes/application.yaml	
+@@ -1,5 +1,5 @@
+ server:
+-  port: 8194
++  port: 8193
+   servlet:
+     context-path: /event
+ spring:
+Index: target/classes/static/events.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nangular.module('app', []).controller('eventsController', function ($scope, $http) {\r\n\r\n    $scope.loadEvents = function () {\r\n        $http.get('http://localhost:8194/event/api/v1/events').then(function (response) {\r\n            $scope.eventsList = response.data;\r\n            console.log(response.data);\r\n        });\r\n    }\r\n\r\n    $scope.showEventInfo = function (eventId) {\r\n        $http.get('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {\r\n            alert(response.data.description);\r\n        });\r\n    }\r\n\r\n    $scope.deleteEventById = function (eventId) {\r\n        $http.delete('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {\r\n            $scope.loadEvents();\r\n        });\r\n    }\r\n\r\n    $scope.loadEvents();\r\n\r\n});\r\n
+===================================================================
+diff --git a/target/classes/static/events.js b/target/classes/static/events.js
+--- a/target/classes/static/events.js	
++++ b/target/classes/static/events.js	
+@@ -2,20 +2,20 @@
+ angular.module('app', []).controller('eventsController', function ($scope, $http) {
+ 
+     $scope.loadEvents = function () {
+-        $http.get('http://localhost:8194/event/api/v1/events').then(function (response) {
++        $http.get('http://localhost:8193/event/api/v1/events').then(function (response) {
+             $scope.eventsList = response.data;
+             console.log(response.data);
+         });
+     }
+ 
+     $scope.showEventInfo = function (eventId) {
+-        $http.get('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {
++        $http.get('http://localhost:8193/event/api/v1/events/' + eventId).then(function (response) {
+             alert(response.data.description);
+         });
+     }
+ 
+     $scope.deleteEventById = function (eventId) {
+-        $http.delete('http://localhost:8194/event/api/v1/events/' + eventId).then(function (response) {
++        $http.delete('http://localhost:8193/event/api/v1/events/' + eventId).then(function (response) {
+             $scope.loadEvents();
+         });
+     }
