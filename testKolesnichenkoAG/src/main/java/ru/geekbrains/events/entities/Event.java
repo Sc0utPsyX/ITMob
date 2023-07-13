@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "itmob.events")
+@Table(schema = "itmob", name = "events")
 @NoArgsConstructor
 public class Event {
 
@@ -29,6 +29,7 @@ public class Event {
     @CreationTimestamp
     private LocalDateTime createData;
 
+    @ManyToOne
     @Column(name = "owner_id") // должна быть связь с id пользователя ?? вроде должна
     private Long ownerId;
 
