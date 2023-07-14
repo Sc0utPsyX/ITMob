@@ -5,11 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "itmob.event_types")
+@Table(schema = "itmob", name = "event_types")
 public class Type {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,6 +19,9 @@ public class Type {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "type")
+    private List<Event> events;
 
     @Column(name = "description")
     private String description;

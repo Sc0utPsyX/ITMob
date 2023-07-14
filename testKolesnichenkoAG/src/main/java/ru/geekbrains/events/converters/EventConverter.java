@@ -25,7 +25,7 @@ public class EventConverter {
         p.setCreateData(eventDto.getCreateData());
         p.setOwnerId(eventDto.getOwnerId());
         p.setEventDate(eventDto.getEventDate());
-        Type t = typeService.findByTitle(eventDto.getEventType()).orElseThrow(() ->new RuntimeException("Тип события не найден"));
+        Type t = typeService.findByTitle(eventDto.getEventType()).orElseThrow(() -> new RuntimeException("Тип события не найден"));
         p.setEventType(t);
         return p;
     }
