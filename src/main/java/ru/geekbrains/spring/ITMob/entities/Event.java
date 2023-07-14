@@ -25,7 +25,7 @@ public class Event {
     private String description;
 
     @Column(name = "event_date")
-    private String event_date;
+    private Timestamp event_date;
 
     @Column(name = "event_place")
     private String event_place;

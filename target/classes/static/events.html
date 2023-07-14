@@ -33,8 +33,9 @@
             <td>{{p.event}}</td>
             <td>{{p.event_place}}</td>
             <td>
-                <button type="button" class="btn-outline-info" ng-click="showEventInfo(p.id)">Info</button>
-                <button type="button" class="btn btn-outline-danger" ng-click="deleteEventById(p.id)">Delete</button>
+                <button type="button" ng-show="isUserLoggedIn()"  class="btn btn-secondary" ng-click="followToEvent(p.id)">Follow</button>
+                <button type="button" ng-show="isUserAdmin()" class="btn btn-info" ng-click="showEventInfo(p.id)">Info</button>
+                <button type="button" ng-show="isUserAdmin()" class="btn btn-danger" ng-click="deleteEventById(p.id)">Delete</button>
             </td>
         </tr>
         </tbody>

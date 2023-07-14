@@ -2,12 +2,10 @@ Index: front-service/src/main/resources/static/index.js
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
 <+>(function () {\n    angular\n        .module('socialnetwork', ['ngRoute', 'ngStorage'])\n        .config(config)\n        .run(run);\n\n    function config($routeProvider) {\n        $routeProvider\n            .when('/', {\n                templateUrl: 'start-page/start-page.html',\n                controller: 'startController'\n            })\n            .when('/login', {\n                templateUrl: 'login/login.html',\n                controller: 'loginController'\n            })\n            .otherwise({\n                redirectTo: '/'\n            });\n    }\n\nfunction run($rootScope, $http, $localStorage) {\n    if ($localStorage.itMobUser) {\n        try {\n            let jwt = $localStorage.itMobUser.token;\n            let payload = JSON.parse(atob(jwt.split('.')[1]));\n            let currentTime = parseInt(new Date().getTime() / 1000);\n            if (currentTime > payload.exp) {\n                console.log(\"Token got expired\");\n                delete $localStorage.itMobUser;\n                $http.defaults.headers.common.Authorization = '';\n            }\n        } catch (e) {\n        }\n        if ($localStorage.itMobUser) {\n            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.itMobUser.token;\n        }\n    }\n}\n})();\n\nangular.module('socialnetwork').controller('mainController', function ($rootScope, $scope, $http, $location, $localStorage) {\n\n    $scope.tryToLogout = function () {\n        $scope.clearUser();\n        $location.path('/');\n    };\n\n    $scope.clearUser = function () {\n        delete $localStorage.itMobUser;\n        $http.defaults.headers.common.Authorization = '';\n    };\n\n    $rootScope.isUserLoggedIn = function () {\n        if ($localStorage.itMobUser) {\n            return true;\n        } else {\n            return false;\n        }\n    };\n});\n\n
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
 ===================================================================
 diff --git a/front-service/src/main/resources/static/index.js b/front-service/src/main/resources/static/index.js
---- a/front-service/src/main/resources/static/index.js	(revision 66a69139d91a1e71df4471586d0ae76cbdb14f53)
-+++ b/front-service/src/main/resources/static/index.js	(date 1688702143337)
+--- a/front-service/src/main/resources/static/index.js	
++++ b/front-service/src/main/resources/static/index.js	
 @@ -1,3 +1,5 @@
 +
 +///

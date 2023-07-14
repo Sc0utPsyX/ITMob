@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_rebase_[Changes]2" date="1689334975521" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before rebase [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/ru/geekbrains/spring/ITMob/controllers/EventController.class" />
+    <option name="AFTER_PATH" value="target/classes/ru/geekbrains/spring/ITMob/controllers/EventController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/EventController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/ru/geekbrains/spring/ITMob/entities/Event.class" />
+    <option name="AFTER_PATH" value="target/classes/ru/geekbrains/spring/ITMob/entities/Event.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Event.class" />
+  </binary>
+</changelist>
