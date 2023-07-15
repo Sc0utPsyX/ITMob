@@ -1,13 +1,13 @@
 package com.geekbrains.userservice.services;
 
-import com.geekbrains.userservice.models.UserDto;
-import com.geekbrains.userservice.models.UserPassChgReq;
-import com.geekbrains.userservice.models.UserRegReq;
-import com.geekbrains.userservice.models.UserUpdateReq;
+import com.geekbrains.userservice.models.*;
 
 public interface UserService {
-    UserDto register(UserRegReq userRegReq);
-    UserDto update(UserUpdateReq userUpdateReq);
-    UserDto changePassword(UserPassChgReq userPassChgReq);
-    UserDto viewUser(String username);
+
+    AuthResponse authenticate(AuthRequest authRequest);
+    AuthResponse register(UserRegReq userRegReq, String token);
+
+    UserDto update(UserUpdateReq userUpdateReq, String token);
+    UserDto changePassword(UserPassChgReq userPassChgReq, String token);
+    UserDto viewUser(Long id, String token);
 }
