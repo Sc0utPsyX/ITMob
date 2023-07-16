@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.events.entities.Type;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -22,8 +21,13 @@ public class EventDto {
     private Long ownerId;
     private Date eventDate;
     private String eventType;
+    private String eventLocation;
 
     public String getEventType() {
         return eventType;
+    }
+
+    public String getEventLocation() {
+        return eventLocation;
     }
 }

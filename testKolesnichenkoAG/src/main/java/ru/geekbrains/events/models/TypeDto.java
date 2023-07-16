@@ -16,5 +16,5 @@ public class TypeDto {
     private Long id;
     private String name;
     private String description;
-    private List<EventDto> events;
+    //private List<EventDto> events;
 }

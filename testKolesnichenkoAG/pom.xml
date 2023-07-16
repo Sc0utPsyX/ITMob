@@ -10,12 +10,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>ru.gb</groupId>
+    <groupId>ru.geekbrains</groupId>
     <artifactId>testKolesnichenkoAG</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -76,6 +75,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.0.5</version>
                 <configuration>
                     <excludes>
                         <exclude>

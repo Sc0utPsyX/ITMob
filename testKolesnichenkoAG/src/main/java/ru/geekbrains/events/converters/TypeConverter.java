@@ -18,7 +18,7 @@ public class TypeConverter {
         c.setId(type.getId());
         c.setName(type.getName());
         c.setDescription(type.getDescription());
-        c.setEvents(type.getEvents().stream().map(eventConverter::entityToDto).collect(Collectors.toList()));
+        //c.setEvents(type.getEvents().stream().map(eventConverter::entityToDto).collect(Collectors.toList()));
         return c;
     }
 }

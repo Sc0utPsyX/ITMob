@@ -14,7 +14,7 @@ public class TypeService {
 
     private final TypeRepository typeRepository;
 
-    public Optional<Type> findByTitle(String title) {
-        return typeRepository.findByTitle(title);
+    public Optional<Type> findByName(String name) {
+        return typeRepository.findByName(name);
     }
 }

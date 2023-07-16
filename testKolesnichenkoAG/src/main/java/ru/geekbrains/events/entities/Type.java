@@ -20,8 +20,8 @@ public class Type {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "type")
-    private List<Event> events;
+   /* @OneToMany(mappedBy = "type")
+    private List<Event> events;*/
 
     @Column(name = "description")
     private String description;

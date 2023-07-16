@@ -29,7 +29,7 @@ public class Event {
     @CreationTimestamp
     private LocalDateTime createData;
 
-    @ManyToOne
+    //@ManyToOne
     @Column(name = "owner_id") // должна быть связь с id пользователя ?? вроде должна
     private Long ownerId;
 
@@ -39,4 +39,8 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "event_type")
     private Type eventType;
+
+    @ManyToOne
+    @JoinColumn(name = "event_location")
+    private Location eventLocation;
 }

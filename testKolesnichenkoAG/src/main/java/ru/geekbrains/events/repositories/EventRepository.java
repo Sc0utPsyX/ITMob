@@ -6,4 +6,5 @@ import ru.geekbrains.events.entities.Event;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
+
 }

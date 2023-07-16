@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.geo.Point;
 
 import java.util.List;
 
@@ -12,11 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventLocationDto {
+public class LocationDto {
 
-    private Long eventId;
+    private Long id;
     private String address;
-    private Point coordinates;
+   // private Point coordinates;
     private String detail;
     private List<EventDto> events;
 }
