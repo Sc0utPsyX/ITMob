@@ -1,4 +1,19 @@
-angular.module('market', ['ngStorage']).controller('indexController', function ($scope, $http, $localStorage) {
+(function () {
+    angular
+        .module('socialnetwork', ['ngRoute', 'ngStorage'])
+        .config(config)
+
+    function config($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'start-page/start-page.html',
+                controller: 'startController'
+            });
+    }
+ }
+
+
+angular.module('socialnetwork').controller('mainController', function ($rootScope, $scope, $http, $location, $localStorage) {
     if ($localStorage.winterMarketUser) {
         try {
             let jwt = $localStorage.winterMarketUser.token;

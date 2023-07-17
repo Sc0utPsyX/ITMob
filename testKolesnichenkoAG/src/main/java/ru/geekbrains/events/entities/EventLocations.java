@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(schema = "itmob", name = "event_location")
-public class Location {
+public class EventLocations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

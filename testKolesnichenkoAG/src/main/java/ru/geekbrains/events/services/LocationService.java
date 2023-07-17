@@ -2,7 +2,7 @@ package ru.geekbrains.events.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.events.entities.Location;
+import ru.geekbrains.events.entities.EventLocations;
 import ru.geekbrains.events.repositories.LocationRepository;
 
 import java.util.Optional;
@@ -13,7 +13,7 @@ public class LocationService {
 
     private final LocationRepository locationRepository;
 
-    public Optional<Location> findByAddress(String address) {
+    public Optional<EventLocations> findByAddress(String address) {
         return locationRepository.findByAddress(address);
     }
 }

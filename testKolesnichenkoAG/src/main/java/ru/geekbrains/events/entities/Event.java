@@ -42,5 +42,5 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "event_location")
-    private Location eventLocation;
+    private EventLocations eventLocations;
 }

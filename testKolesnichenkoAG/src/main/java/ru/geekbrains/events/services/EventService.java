@@ -3,7 +3,7 @@ package ru.geekbrains.events.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.events.entities.Event;
-import ru.geekbrains.events.entities.Location;
+import ru.geekbrains.events.entities.EventLocations;
 import ru.geekbrains.events.entities.Type;
 import ru.geekbrains.events.models.EventDto;
 import ru.geekbrains.events.models.ResourceNotFoundException;
@@ -40,9 +40,9 @@ public class EventService {
         Type type = typeService.findByName(eventDto.getEventType()).
                 orElseThrow(() -> new ResourceNotFoundException("Type not found"));
         event.setEventType(type);
-        Location location = locationService.findByAddress(eventDto.getEventLocation()).
+        EventLocations eventLocations = locationService.findByAddress(eventDto.getEventLocation()).
                 orElseThrow(() -> new ResourceNotFoundException("Address location not found"));
-        event.setEventLocation(location);
+        event.setEventLocations(eventLocations);
         eventRepository.save(event);
         return event;
     }
