@@ -7,6 +7,7 @@
     <modules>
         <module>front-service</module>
         <module>user-service</module>
+        <module>rabbitmq-service</module>
     </modules>
 
     <groupId>ru.gb.ITMob.social</groupId>
