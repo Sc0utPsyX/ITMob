@@ -10,4 +10,5 @@ public interface UserService {
     UserDto update(UserUpdateReq userUpdateReq, String token);
     UserDto changePassword(UserPassChgReq userPassChgReq, String token);
     UserDto viewUser(Long id, String token);
+    Boolean deleteUser(Long id, String token);
 }

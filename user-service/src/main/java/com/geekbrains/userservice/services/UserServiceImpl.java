@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
         } else {
             Right userRight = rightRepository.findByName("user")
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid role in user reg request."));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Right 'User' cannot be found in DB"));
             rights.add(userRight);
         }
 
@@ -99,6 +99,7 @@ public class UserServiceImpl implements UserService {
         if (userByLogin.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this login already exists");
         }
+        // TODO: 17.07.2023 check if password is secure
         if (password == null || "".equals(password)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password cannot be empty");
         }
@@ -157,19 +158,23 @@ public class UserServiceImpl implements UserService {
     public UserDto update(UserUpdateReq userUpdateReq, String token) {
 
         UserDto userDto = userUpdateReq.getUserDto();
+        Long userId = userDto.getId();
         String login = userDto.getLogin();
         String username = userDto.getUsername();
         List<String> prefRoles = userDto.getRights();
+        UserDetailsDto userDetailsDto = userDto.getUserDetails();
         boolean isAdmin = tokenService.hasRight(token, "admin");
 
         String email = null;
-        if (userDto.getUserDetails() != null) {
-            email = userDto.getUserDetails().getEmail();
+        if (userDetailsDto != null) {
+            email = userDetailsDto.getEmail();
         }
 
         //validate token
         checkExpiration(token);
-        if (!tokenService.getId(token).equals(userDto.getId()) && !isAdmin) {
+
+        //token id != target id && not admin
+        if (!tokenService.getId(token).equals(userId) && !isAdmin) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized access.");
         }
 
@@ -181,41 +186,38 @@ public class UserServiceImpl implements UserService {
         }
 
         //input data validation
-        if (isAdmin && "".equals(login)) {
+        if (isAdmin && (login == null || "".equals(login))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login cannot be empty");
         }
-
-        if ("".equals(username)) {
+        if (userId == null || userId <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id in reg request");
+        }
+        if (username == null || "".equals(username)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username cannot be empty");
         }
-
-        if ("".equals(email)) {
+        if (email == null || "".equals(email)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email cannot be empty");
         }
 
-        User user = userRepository.findById(userDto.getId())
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with this id not found"));
 
         //check if username is new and not taken
-        if (username != null &&
-                !user.getUsername().equals(username) &&
-                userRepository.findByUsername(username).isPresent()) {
+        if (!user.getUsername().equals(username) && userRepository.findByUsername(username).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already registered");
         }
         //check if email is new and not taken
-        if (email != null &&
+        if (user.getUserDetails() != null &&
                 !user.getUserDetails().getEmail().equals(email) &&
                 userDetailsRepository.findByEmail(email).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already registered");
         }
         //check if admin is changing login to already registered one
-        if (isAdmin &&
-                login != null &&
-                !user.getLogin().equals(login) &&
-                userRepository.findByLogin(login).isPresent()) {
+        if (!user.getLogin().equals(login) && userRepository.findByLogin(login).isPresent()) { //&& isAdmin (less secure)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login is already registered");
         }
 
+        //persistence
         user = UserMapper.MAPPER.updateUser(userDto, user);
 
         //only admin can set rights
@@ -242,31 +244,94 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto changePassword(UserPassChgReq userPassChgReq, String token) {
-        return null;
+
+        boolean isAdmin = tokenService.hasRight(token, "admin");
+        //login instead of id for security purposes
+        String login = userPassChgReq.getLogin();
+        String oldPassword = userPassChgReq.getOldPassword();
+        String newPassword = userPassChgReq.getNewPassword();
+
+        //validate token
+        checkExpiration(token);
+
+        //token login != target login && not admin
+        if (!tokenService.getLogin(token).equals(login) && !isAdmin) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized access");
+        }
+
+        //validate input data
+        if (login == null || "".equals(login)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id in request");
+        }
+        if (!isAdmin && (oldPassword == null || "".equals(oldPassword))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password cannot be empty");
+        }
+        // TODO: 17.07.2023 check if password is secure
+        if (newPassword == null || "".equals(newPassword)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "New password cannot be empty");
+        }
+        if (newPassword.equals(oldPassword)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Passwords must be different");
+        }
+
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this login not found"));
+
+        //admin can change password without knowing the old one
+        if (isAdmin || bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        } else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized access");
+        }
+
+        return UserMapper.MAPPER.toDto(user);
     }
 
     @Override
     public UserDto viewUser(Long id, String token) {
+        User user = getUserById(id, token);
+        return UserMapper.MAPPER.toDto(user);
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteUser(Long id, String token) {
+        User user = getUserById(id, token);
+        //id exists 100% here so delete is successful in any case
+        userRepository.deleteById(user.getId());
+        return true;
+    }
+
+    @Transactional
+    //transactional methods must be overridable so it`s protected not private
+    protected User getUserById(Long id, String token) {
 
         checkExpiration(token);
 
         Long targetId;
+
         if (id == null) {
             targetId = tokenService.getId(token);
-        } else if (tokenService.hasRight(token, "admin")){
+        } else if (tokenService.hasRight(token, "admin")) {
             targetId = id;
         } else {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized access");
         }
 
-        User user = userRepository.findById(targetId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with this id not found"));
+        if (targetId <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id in request");
+        }
 
-        return UserMapper.MAPPER.toDto(user);
+        return userRepository.findById(targetId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User with this id not found"));
     }
 
     public void checkExpiration(String token) {
+        // TODO: 19.07.2023 make all exceptions more informative for service clients (lesson #4 example)
+        // TODO: 19.07.2023 make validating process through hibernate validators
+        // TODO: 19.07.2023 make proper logging 
         if (tokenService.isExpired(token)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token is expired");
         }

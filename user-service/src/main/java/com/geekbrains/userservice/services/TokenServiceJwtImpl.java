@@ -70,28 +70,35 @@ public class TokenServiceJwtImpl implements TokenService {
                     .parseClaimsJws(token)
                     .getBody();
 
+            Date expiration = claims.getExpiration();
+            String subject = claims.getSubject();
+            Long id = claims.get("id", Long.class);
+            String email = claims.get("email", String.class);
+            String username = claims.get("username", String.class);
+            List<?> authorities = claims.get("authorities", List.class);
+
             //checking mandatory token attributes
-            if (claims.getExpiration() == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expiration not found in token");
+            if (expiration == null || "".equals(expiration.toString())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expiration not found in token or empty");
             }
-            if (claims.getSubject() == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subject not found in token");
+            if (subject == null || "".equals(subject)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Subject not found in token or empty");
             }
-            if (claims.get("authorities", List.class) == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authorities not found in token.");
+            if (authorities == null || authorities.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Authorities not found in token or empty");
             }
-            if (claims.get("id", Long.class) == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User id not found in token");
+            if (id == null || id <= 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User id not found in token or invalid");
             }
-            if (claims.get("email", String.class) == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email not found in token.");
+            if (email == null || "".equals(email)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email not found in token or empty");
             }
-            if (claims.get("username", String .class) == null) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username not found in token");
+            if (username == null || "".equals(username)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username not found in token or empty");
             }
 
             return claims;
-        } catch (JwtException ex) {
+        } catch (JwtException | IllegalArgumentException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something wrong with the token");
         }
     }

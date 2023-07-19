@@ -16,8 +16,8 @@ public class UserController {
 
     private final UserService userService;
 
-
     @GetMapping("/auth")
+    @ResponseStatus(HttpStatus.OK)
     public AuthResponse authenticate(@RequestBody AuthRequest authRequest) {
         return userService.authenticate(authRequest);
     }
@@ -49,6 +49,26 @@ public class UserController {
     )
     {
         return userService.update(userUpdateReq, token);
+    }
+
+    @PutMapping("/password")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto changePassword(
+            @RequestHeader(name = "authorization") String token,
+            @RequestBody UserPassChgReq userPassChgReq
+    )
+    {
+        return userService.changePassword(userPassChgReq, token);
+    }
+
+    @DeleteMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean delete(
+            @RequestHeader(name = "authorization")String token,
+            @RequestParam(required = false, name = "user_id") Long userId
+    )
+    {
+        return userService.deleteUser(userId, token);
     }
 
 
