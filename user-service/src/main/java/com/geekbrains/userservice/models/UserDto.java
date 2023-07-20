@@ -20,7 +20,7 @@ public class UserDto {
     private UserDetailsDto userDetails;
     private List<String> rights;
     private LocalDateTime createDate;
-    private LocalDateTime registerDate;
-    private boolean regConfirmed;
-    private boolean active;
+    private LocalDateTime modifyDate;
+    private Boolean regConfirmed;
+    private Boolean active;
 }
