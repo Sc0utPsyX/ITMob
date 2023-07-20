@@ -18,10 +18,7 @@ spring:
         - id: testKolesnichenkoAG
           uri: http://localhost:8189
           predicates:
-            - Path=/event/**
-          filters:
-            - StripPrefix=1
-            - PrefixPath=/events
+            - Path=/events/**
 
 
 

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru">
+
 <html ng-app="socialnetwork">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>ITMob</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Navbar-Centered-Links-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -30,18 +29,40 @@
     <div class="container" ng-controller="mainController">
         <div class="row">
             <div class="col-lg-3"><a href="#!/"><button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Главная страница</button></a>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Выбрать тип события</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Укажите название</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Содержание события</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Дата события</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Публикация собятия</button>
+
+                <!--<button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Укажите название</button>
+                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Содержание события</button>
+                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Дата события</button>
+                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Публикация собятия</button>-->
             </div>
             <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
                 <ng-view></ng-view>
             </div>
         </div>
+        <h3>Выберите тип события</h3>
+        <table class="table table-hover">
+            <tr>
+                <td>ID</td>
+                <td>Наименование</td>
+                <td>Описание</td>
+                <td></td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="t in typesList">
+                <td>{{t.id}}</td>
+                <td>{{t.name}}</td>
+                <td>{{t.description}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="showEventInfo(t.id)">Info</button>
+                    <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Выбрать</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </section>
+
+
 
 <footer class="text-center py-4">
     <div class="container">
@@ -66,9 +87,7 @@
     </div>
 </footer>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="index.js"></script>
 <script src="start-page/start-page.js"></script>
-<script src="login/login.js"></script>
 </body>
 
 </html>
