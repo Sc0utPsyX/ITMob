@@ -14,80 +14,47 @@
 </head>
 
 <body>
-<section>
-    <nav class="navbar navbar-light navbar-expand-md py-3" ng-controller="mainController">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>ITMob</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-3">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#" style="font-weight: bold;">Москва и МО</a></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Помощь</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container" ng-controller="mainController">
-        <div class="row">
-            <div class="col-lg-3"><a href="#!/"><button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(--bs-black);">Главная страница</button></a>
-
-                <!--<button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Укажите название</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Содержание события</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Дата события</button>
-                <button class="btn btn-primary" type="button" style="height: 40px;width: 100%;margin: 5px;color: rgb(0,0,0);background: rgba(13,110,253,0);border-color: var(&#45;&#45;bs-black);">Публикация собятия</button>-->
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                <ng-view></ng-view>
-            </div>
-        </div>
+    <div class="container" ng-controller="eventController">
         <h3>Выберите тип события</h3>
         <table class="table table-hover">
             <tr>
-                <td>ID</td>
+                <!--<td>ID</td>-->
                 <td>Наименование</td>
                 <td>Описание</td>
                 <td></td>
             </tr>
             <tbody>
             <tr ng-repeat="t in typesList">
-                <td>{{t.id}}</td>
+                <!--<td>{{t.id}}</td>-->
                 <td>{{t.name}}</td>
                 <td>{{t.description}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" ng-click="showEventInfo(t.id)">Info</button>
+                    <!--<button type="button" class="btn btn-primary" ng-click="showEventInfo(t.id)">Info</button>-->
                     <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Выбрать</button>
                 </td>
             </tr>
             </tbody>
         </table>
+        <form class="row g-3" ng-submit="createNewEvent()">
+            <div class="col-auto">
+                <input type="text" class="form-control" id="newEventEvent" ng-model="newEvent.event" placeholder="Наименование события">
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="newEventDescription" ng-model="newEvent.description" placeholder="Содержание">
+            </div>
+            <div class="col-auto">
+                <input type="date" class="form-control" id="newEventEventData" ng-model="newEvent.event_data" placeholder="дата проведения события">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3" onclick="window.location.href='http://localhost:5555/events/api/v1/events';">Создать</button>
+            </div>
+        </form>
     </div>
-</section>
 
-
-
-<footer class="text-center py-4">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-lg-3">
-            <div class="col">
-                <p class="text-muted my-2">Copyright&nbsp;© 2023 ITMob</p>
-            </div>
-            <div class="col">
-                <ul class="list-inline my-2">
-                    <li class="list-inline-item me-4"></li>
-                    <li class="list-inline-item me-4"></li>
-                    <li class="list-inline-item"></li>
-                </ul>
-            </div>
-            <div class="col">
-                <ul class="list-inline my-2">
-                    <li class="list-inline-item"><a class="link-secondary" href="#">Политика безопасности</a></li>
-                    <li class="list-inline-item"><a class="link-secondary" href="#">Правила пользования</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="start-page/start-page.js"></script>
+<script src="created-event/created-event.js"></script>
+
 </body>
 
 </html>

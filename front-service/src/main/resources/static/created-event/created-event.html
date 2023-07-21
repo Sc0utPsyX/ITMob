@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+<div class="container" ng-controller="createdEventController">
+    <h3>Вами создано событие</h3>
+    <table class="table table-hover">
+        <tr>
+            <!--<td>ID</td>-->
+            <td>Наименование</td>
+            <td>Описание</td>
+            <td>Дата создания</td>
+            <td>Id создателя</td>
+            <td>дата проведения события</td>
+            <td>тип события</td>
+            <td>место проведения</td>
+            <td></td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="t in createdEventList">
+            <!--<td>{{t.id}}</td>-->
+            <td>{{t.name}}</td>
+            <td>{{t.description}}</td>
+            <td>{{t.createData}}</td>
+            <td>{{t.ownerId}}</td>
+            <td>{{t.eventDate}}</td>
+            <td>{{t.eventType}}</td>
+            <td>{{t.eventLocations}}</td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="deleteEvent(t.id)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="created_events.js"></script>
+</body>
+
+
+</html>
