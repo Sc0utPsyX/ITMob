@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS itmob;
 
-CREATE DOMAIN gender CHAR(1)
+CREATE DOMAIN itmob.gender CHAR(1)
     CHECK (value IN ('F','M'));
 
 CREATE  TABLE itmob.users (
@@ -35,7 +35,7 @@ CREATE  TABLE itmob.user_rights (
 CREATE  TABLE itmob.dic_rights (
                                    id                   serial  NOT NULL  ,
                                    "name"               varchar(255)  NOT NULL  ,
-                                   active               boolean DEFAULT False NOT NULL  ,
+                                   active               boolean NOT NULL  ,
                                    CONSTRAINT pk_dic_rights PRIMARY KEY ( id )
 );
 
