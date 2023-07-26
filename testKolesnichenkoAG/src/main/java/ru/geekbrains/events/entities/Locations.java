@@ -3,11 +3,12 @@ package ru.geekbrains.events.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(schema = "itmob", name = "event_location")
-public class EventLocations {
+public class Locations {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +18,8 @@ public class EventLocations {
     @Column(name = "address")
     private String address;
 
-    /*@OneToMany(mappedBy = "location")
-    private List<Event> events;*/
+    @OneToMany(mappedBy = "location")
+    private List<Event> events;
 
     /*@Column(name = "coordinates")
     private Point coordinates;*/

@@ -1,6 +1,8 @@
 package ru.geekbrains.events.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.events.converters.EventConverter;
 import ru.geekbrains.events.entities.Event;
@@ -30,11 +32,25 @@ public class EventController {
         return eventConverter.entityToDto(p);
     }
 
-    @PostMapping
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public EventDto crateNewEvent(@RequestBody EventDto eventDto) {
         Event p = eventService.createNewEvent(eventDto);
         return eventConverter.entityToDto(p);
     }
+
+   /* @PostMapping("/create")
+    public EventDto createEvent(@RequestBody EventDto eventDto)
+        Event event = new Event();
+        event.setEmail(registrationUserDto.getEmail());
+        user.setUsername(registrationUserDto.getUsername());
+        user.setPassword(passwordEncoder.encode(registrationUserDto.getPassword()));
+        userService.createUser(user);
+
+        UserDetails userDetails = userService.loadUserByUsername(registrationUserDto.getUsername());
+        String token = jwtTokenUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new JwtResponse(token));
+    }*/
 
     @DeleteMapping("/{id}")
     public void deleteEventById(@PathVariable Long id) {

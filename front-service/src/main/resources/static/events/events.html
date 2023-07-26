@@ -1,0 +1,29 @@
+<div class="container" ng-controller="eventsController2">
+    <p></p>
+    <h3>Мои события</h3>
+    <p></p>
+
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Название события</td>
+            <td>Описание события</td>
+            <td>Дата создания</td>
+            <td>Дата проведения события</td>
+            <td>Тип события</td>
+            <td>Место проведения</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="event in eventsList">
+            <td>{{event.title}}</td>
+            <td>{{event.description}}</td>
+            <td>{{event.createData}}</td>
+            <td>{{event.eventDate}}</td>
+            <td>{{event.type}}</td>
+            <td>{{event.location}}</td>
+            <td>
+                <button type="button" class="btn btn-danger" ng-click="deleteEvent(event.id)">Удалить событие</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

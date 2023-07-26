@@ -19,8 +19,8 @@ public class Event {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "event")
-    private String event;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
     private String description;
@@ -29,7 +29,7 @@ public class Event {
     @CreationTimestamp
     private LocalDateTime createData;
 
-    //@ManyToOne
+    //@OneToOne
     @Column(name = "owner_id") // должна быть связь с id пользователя ?? вроде должна
     private Long ownerId;
 
@@ -37,10 +37,10 @@ public class Event {
     private Date eventDate;
 
     @ManyToOne
-    @JoinColumn(name = "event_type")
-    private Type eventType;
+    @JoinColumn(name = "type_id")
+    private Type type;
 
     @ManyToOne
     @JoinColumn(name = "event_location")
-    private EventLocations eventLocations;
+    private Locations location;
 }

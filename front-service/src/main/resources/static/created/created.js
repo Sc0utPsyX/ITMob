@@ -1,4 +1,4 @@
-angular.module('socialnetwork').controller('createdEventController', function ($scope, $http) {
+angular.module('socialnetwork').controller('createdController', function ($scope, $http) {
 
  $scope.fillTable = function () {
         $http.get('http://localhost:5555/events/api/v1/types')

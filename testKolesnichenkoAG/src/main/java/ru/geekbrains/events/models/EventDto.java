@@ -15,19 +15,18 @@ import java.time.LocalDateTime;
 public class EventDto {
 
     private Long id;
-    private String event;
+    private String title;
     private String description;
-    private LocalDateTime createData;
     private Long ownerId;
     private Date eventDate;
-    private String eventType;
-    private String eventLocation;
+    private String typeName;
+    private String LocationAddress;
 
-    public String getEventType() {
-        return eventType;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public String getEventLocation() {
-        return eventLocation;
+    public String getLocationAddress() {
+        return LocationAddress;
     }
 }

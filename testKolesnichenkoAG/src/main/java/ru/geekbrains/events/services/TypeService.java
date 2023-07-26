@@ -23,4 +23,8 @@ public class TypeService {
     public List<Type> findAll() {
         return typeRepository.findAll();
     }
+
+   /* public Type getEventType() {
+        return typeRepository.findByName("TYPE_EVENT").get();
+    }*/
 }

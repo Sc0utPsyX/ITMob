@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html ng-app="socialnetwork">
+<html ng-app="socialnetwork" lang="ru">
+
 
 <head>
     <meta charset="utf-8">
@@ -10,11 +11,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-    <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
 </head>
+
+<h3>Создание события</h3>
 
 <body>
     <div class="container" ng-controller="eventController">
+
         <h3>Выберите тип события</h3>
         <table class="table table-hover">
             <tr>
@@ -30,14 +34,15 @@
                 <td>{{t.description}}</td>
                 <td>
                     <!--<button type="button" class="btn btn-primary" ng-click="showEventInfo(t.id)">Info</button>-->
-                    <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Выбрать</button>
+                    <button type="button" class="btn btn-primary" ng-click="addType(t.id)">Выбрать</button>
                 </td>
             </tr>
             </tbody>
         </table>
+        <h3>Заполните данные для создания события</h3>
         <form class="row g-3" ng-submit="createNewEvent()">
             <div class="col-auto">
-                <input type="text" class="form-control" id="newEventEvent" ng-model="newEvent.event" placeholder="Наименование события">
+                <input type="text" class="form-control" id="newEventTitle" ng-model="newEvent.title" placeholder="Наименование события">
             </div>
             <div class="col-auto">
                 <input type="text" class="form-control" id="newEventDescription" ng-model="newEvent.description" placeholder="Содержание">
@@ -46,15 +51,17 @@
                 <input type="date" class="form-control" id="newEventEventData" ng-model="newEvent.event_data" placeholder="дата проведения события">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3" onclick="window.location.href='http://localhost:5555/events/api/v1/events';">Создать</button>
+                <button type="submit" class="btn btn-primary mb-3" >Создать</button>
             </div>
         </form>
+        <li class="nav-item">
+            <a class="nav-link" href="#!/events">Мои события</a>
+        </li>
+
+        <ng-view></ng-view>
+        <script src="index.js"></script>
+        <script src="events/events.js"></script>
+        <script src="created/created.js"></script>
     </div>
-
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="start-page/start-page.js"></script>
-<script src="created-event/created-event.js"></script>
-
 </body>
-
 </html>
