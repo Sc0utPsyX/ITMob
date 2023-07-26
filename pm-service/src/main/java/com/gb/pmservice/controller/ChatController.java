@@ -1,6 +1,7 @@
 package com.gb.pmservice.controller;
 
 import com.gb.pmservice.model.PrivateMessage;
+import com.gb.pmservice.model.PrivateMessageStatus;
 import com.gb.pmservice.service.PrivateMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,10 @@ public class ChatController {
 
     @MessageMapping("/chat")
     public void processMessage(@Payload PrivateMessage privateMessage) {
-        PrivateMessage saved = privateMessageService.save(privateMessage);
+        privateMessage.setMessageStatus(PrivateMessageStatus.SENT);
+        PrivateMessage savedMessage = privateMessageService.save(privateMessage);
         messagingTemplate.convertAndSendToUser(
-                String.valueOf(privateMessage.getRecipientId()), "/queue/updates-" + privateMessage.getSenderId(), saved
+                privateMessage.getRecipientId(), "/queue/messages" + privateMessage.getSenderId(), savedMessage
                 );
     }
 
@@ -31,7 +33,7 @@ public class ChatController {
     public ResponseEntity<?> findChatMessages ( @PathVariable String recipientId,
                                                 @PathVariable String senderId) {
         return ResponseEntity
-                .ok(privateMessageService.findPrivateMessageChat(Long.getLong(recipientId), Long.getLong(senderId)));
+                .ok(privateMessageService.findPrivateMessageChat(recipientId, senderId));
     }
 
     @GetMapping("/messages/{id}")

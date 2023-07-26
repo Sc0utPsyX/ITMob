@@ -1,7 +1,6 @@
 package com.gb.pmservice.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,10 +18,10 @@ public class PrivateMessage {
     private Long id;
 
     @Column(name = "recipient_id")
-    private Long recipientId;
+    private String recipientId;
 
     @Column(name = "sender_id")
-    private Long senderId;
+    private String senderId;
 
     @Column(name = "message")
     private String message;
@@ -30,5 +29,7 @@ public class PrivateMessage {
     @Column(name = "create_date")
     @CreationTimestamp
     private LocalDateTime createDate;
- // вот сюда я бы еще статус бы прикрутил сообщения
+
+    @Column(name = "message_status")
+    private PrivateMessageStatus messageStatus;
 }
