@@ -3,9 +3,7 @@ package com.geekbrains.userservice.mappers;
 import com.geekbrains.userservice.entities.Right;
 import com.geekbrains.userservice.entities.User;
 import com.geekbrains.userservice.models.UserDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -17,6 +15,16 @@ public interface UserMapper {
 
     @Mapping(source = "rights", target = "rights", qualifiedByName = "rightListToStringList")
     UserDto toDto(User user);
+
+    @Mapping(target = "rights", ignore = true)
+    @Mapping(target = "id", ignore = true) //even admin cannot modify those
+    @Mapping(target = "createDate", ignore = true) //
+    @Mapping(target = "modifyDate", ignore = true) //
+    @BeanMapping(
+            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+            nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS
+    )
+    User updateUser(UserDto userDto, @MappingTarget User user);
 
     @Named("rightListToStringList")
     default List<String> rightListToStringList(List<Right> rights) {

@@ -3,6 +3,7 @@ package com.geekbrains.userservice.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -45,15 +46,16 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createDate;
 
-    @Column(name = "register_date")
-    @CreationTimestamp
-    private LocalDateTime registerDate;
+    // TODO: 15.07.2023 listen to userDetails changes too
+    @Column(name = "modify_date")
+    @UpdateTimestamp
+    private LocalDateTime modifyDate;
 
     @Column(name = "reg_confirmed")
-    private boolean regConfirmed;
+    private Boolean regConfirmed;
 
     @Column(name = "active")
-    private boolean active;
+    private Boolean active;
 
     public User.Builder builder() {
         return this.new Builder();
@@ -98,8 +100,8 @@ public class User {
             return this;
         }
 
-        public User.Builder setRegisterDate(LocalDateTime registerDate) {
-            User.this.registerDate = registerDate;
+        public User.Builder setModifyDate(LocalDateTime modifyDate) {
+            User.this.modifyDate = modifyDate;
             return this;
         }
 

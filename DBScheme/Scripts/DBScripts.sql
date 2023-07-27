@@ -27,8 +27,8 @@ CREATE  TABLE itmob.users (
 	login                varchar(100)  NOT NULL  ,
 	"password"           varchar(100)  NOT NULL  ,
 	displayname          varchar(100)  NOT NULL  ,
-	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
-	register_date        date    ,
+	create_date          timestamp DEFAULT NOW() NOT NULL  ,
+	register_date        timestamp    ,
 	reg_confirmed        boolean DEFAULT False NOT NULL  ,
 	active               boolean DEFAULT True NOT NULL  ,
 	CONSTRAINT pk_users PRIMARY KEY ( id ),
@@ -39,9 +39,10 @@ CREATE  TABLE itmob.events (
 	id                   bigserial  NOT NULL  ,
 	event                varchar(250)  NOT NULL  ,
 	description          text  NOT NULL  ,
-	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
+	create_date          timestamp DEFAULT NOW NOT NULL  ,
+	update_date			 timestamp DEFAULT NOW NOT NULL  ,
 	owner_id             bigint  NOT NULL  ,
-	event_date           date  NOT NULL  ,
+	event_date           timestamp  NOT NULL  ,
 	event_type           int  NOT NULL  ,
 	CONSTRAINT pk_events PRIMARY KEY ( id )
  );
@@ -62,7 +63,7 @@ CREATE  TABLE itmob.user_messages (
 	recipient_id         bigint  NOT NULL  ,
 	sender_id            bigint  NOT NULL  ,
 	message              varchar(4000)  NOT NULL  ,
-	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
+	create_date          timestamp DEFAULT NOW() NOT NULL  ,
 	CONSTRAINT pk_user_sent_messages PRIMARY KEY ( id )
  );
 
@@ -70,7 +71,7 @@ CREATE  TABLE itmob.event_comments (
 	id                   bigserial  NOT NULL  ,
 	event_id             bigint  NOT NULL  ,
 	"comment"            varchar(4000)  NOT NULL  ,
-	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
+	create_date          timestamp DEFAULT NOW() NOT NULL  ,
 	owner_id             bigint  NOT NULL  ,
 	parent_id            bigint    ,
 	CONSTRAINT pk_event_comments PRIMARY KEY ( id )
@@ -187,6 +188,8 @@ COMMENT ON COLUMN itmob.events.event IS 'Наименование события
 COMMENT ON COLUMN itmob.events.description IS 'Содержанание';
 
 COMMENT ON COLUMN itmob.events.create_date IS 'Дата создания';
+
+COMMENT ON COLUMN itmob.events.update_date IS 'Дата редактирования';
 
 COMMENT ON COLUMN itmob.events.owner_id IS 'Владелец (кто создал)';
 
