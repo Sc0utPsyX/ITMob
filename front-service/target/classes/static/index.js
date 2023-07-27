@@ -14,6 +14,10 @@
                 templateUrl: 'login/login.html',
                 controller: 'loginController'
             })
+            .when('/register', {
+                templateUrl: 'register/register.html',
+                controller: 'registerController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -41,6 +45,15 @@ function run($rootScope, $http, $localStorage) {
 
 angular.module('socialnetwork').controller('mainController', function ($rootScope, $scope, $http, $location, $localStorage) {
 
+    const contextPath = 'http://localhost:8191/front/';
+
+   $scope.loadMenuList = function () {
+        $http.get(contextPath + 'api/v1/menu_list').then(function (response) {
+            $scope.menuList = response.data;
+            console.log(response.data);
+       });
+     }
+
     $scope.tryToLogout = function () {
         $scope.clearUser();
         $location.path('/');
@@ -58,5 +71,8 @@ angular.module('socialnetwork').controller('mainController', function ($rootScop
             return false;
         }
     };
+
+    $scope.loadMenuList();
+
 });
 
