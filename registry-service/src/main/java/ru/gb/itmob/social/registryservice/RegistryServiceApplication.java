@@ -9,8 +9,6 @@ import ru.gb.itmob.social.registryservice.examples.GetUrlExample;
 @SpringBootApplication
 @EnableEurekaServer
 public class RegistryServiceApplication {
-    @Autowired
-    private GetUrlExample discoveryService;
 
     public static void main(String[] args) {
         SpringApplication.run(RegistryServiceApplication.class, args);
