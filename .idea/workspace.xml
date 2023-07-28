@@ -4,7 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff5b4b86-2c49-47f8-b409-7b4a0276d53b" name="Changes" comment=" https://yougile.com/team/7fc5a57b9457/#chat:84230ad85a40" />
+    <list default="true" id="ff5b4b86-2c49-47f8-b409-7b4a0276d53b" name="Changes" comment=" https://yougile.com/team/7fc5a57b9457/#chat:84230ad85a40">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/controllers/EventMembersController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/controllers/EventTypesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/controllers/MenuListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/converters/EventConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/converters/EventMembersConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/converters/EventTypesConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/EventMembersDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/EventTypesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/MenuListDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/PageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/entities/EventMembers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/entities/EventTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/entities/MenuList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/exceptions/ValidationError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/exceptions/ValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/exceptions/ValidationFieldError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/EventMembersRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/EventTypesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/MenuListRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/specifications/EventSpecifications.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/services/EventMembersService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/services/EventTypesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/services/MenuListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/validators/EventValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/validators/Validator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_event_types/event_types_0.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_event_types/event_types_1.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_event_types/event_types_2.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_event_types/event_types_3.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_filter/png-filter-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/109596.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/117885.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/12126177.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/456501.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/459947.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images_menu/558900.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/geekbrains/spring/ITMob/EventMembersServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/ru/geekbrains/spring/ITMob/EventMembersServiceTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/ru/geekbrains/spring/ITMob/ItMobApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/EventController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]2/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ITMob.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/controllers/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/EventDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/dtos/EventDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/entities/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/entities/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/exceptions/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/repositories/EventRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/services/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/geekbrains/spring/ITMob/services/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/events.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/events.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/events.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,20 +108,25 @@
     </option>
   </component>
   <component name="ProjectId" id="2SBqVHkx6yijqbdKYs6TE7md6Oz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ItMobApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.geekbrains.spring.ITMob.ItMobApplication" />
@@ -131,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689169394057</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=" https://yougile.com/team/7fc5a57b9457/#chat:84230ad85a40">
+      <created>1689335127281</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689335127281</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +220,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="https://ru.yougile.com/team/7fc5a57b9457/#chat:c4006f2e4c79" />
     <MESSAGE value=" https://yougile.com/team/7fc5a57b9457/#chat:84230ad85a40" />
     <option name="LAST_COMMIT_MESSAGE" value=" https://yougile.com/team/7fc5a57b9457/#chat:84230ad85a40" />

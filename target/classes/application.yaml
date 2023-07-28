@@ -1,5 +1,5 @@
 server:
-  port: 8195
+  port: 8906
   servlet:
     context-path: /event
 spring:
