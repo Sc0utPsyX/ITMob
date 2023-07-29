@@ -1,0 +1,6 @@
+integrations:
+  event-service:
+    url: http://localhost:8906/event/
+    connect-timeout: 5000
+    read-timeout: 10000
+    write-timeout: 5000

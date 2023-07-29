@@ -18,6 +18,10 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
+            .when('/events', {
+                templateUrl: 'events/events.html',
+                controller: 'eventsController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -45,12 +49,12 @@ function run($rootScope, $http, $localStorage) {
 
 angular.module('socialnetwork').controller('mainController', function ($rootScope, $scope, $http, $location, $localStorage) {
 
-    const contextPath = 'http://localhost:8191/front/';
+   const contextPath = 'http://localhost:8191/front/';
 
    $scope.loadMenuList = function () {
         $http.get(contextPath + 'api/v1/menu_list').then(function (response) {
             $scope.menuList = response.data;
-            console.log(response.data);
+            //console.log(response.data);
        });
      }
 
