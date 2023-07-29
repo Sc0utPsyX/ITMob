@@ -33,6 +33,10 @@ public class User {
     @JoinColumn(name = "id")
     private UserDetails userDetails;
 
+    @OneToOne
+    @JoinColumn(name = "privacy_setting_id")
+    private PrivacySetting privacySetting;
+
     @ManyToMany
     @JoinTable(
             schema = "itmob",
