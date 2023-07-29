@@ -1,10 +1,12 @@
 package com.geekbrains.userservice.services;
 
+import com.geekbrains.userservice.entities.PrivacySetting;
 import com.geekbrains.userservice.entities.Right;
 import com.geekbrains.userservice.entities.User;
 import com.geekbrains.userservice.entities.UserDetails;
 import com.geekbrains.userservice.mappers.UserMapper;
 import com.geekbrains.userservice.models.*;
+import com.geekbrains.userservice.repositories.PrivacySettingRepository;
 import com.geekbrains.userservice.repositories.RightRepository;
 import com.geekbrains.userservice.repositories.UserDetailsRepository;
 import com.geekbrains.userservice.repositories.UserRepository;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final PrivacySettingRepository privacySettingRepository;
 
     @Override
     public AuthResponse authenticate(@RequestBody AuthRequest authRequest) {
@@ -122,6 +125,7 @@ public class UserServiceImpl implements UserService {
                 .setModifyDate(null) //@UpdateTimestamp
                 .setActive(true)
                 .setRegConfirmed(false)
+                .setPrivacySetting(privacySettingRepository.save(new PrivacySetting()))
                 .build();
 
         user = userRepository.save(user);

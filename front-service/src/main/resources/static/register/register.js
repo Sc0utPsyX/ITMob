@@ -1,6 +1,7 @@
 angular.module('socialnetwork').controller('registerController', function ($scope, $http) {
     //@TODO 12.07.2023 Дождаться получения токена сразу после регистрации, либо переделать на редирект к login.html
     $scope.tryToRegister = function () {
+        $scope.user.login = $scope.user.username;
         $http.post('http://localhost:9001/register', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {

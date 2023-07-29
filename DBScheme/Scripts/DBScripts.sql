@@ -14,7 +14,7 @@ CREATE TABLE itmob.event_types
     CONSTRAINT unq_event_types UNIQUE (name)
 );
 
-CREATE TABLE itmob.user_right_types
+CREATE TABLE itmob.dic_rights
 (
     id     serial                NOT NULL,
     name   varchar(255)          NOT NULL,
@@ -26,16 +26,22 @@ CREATE TABLE itmob.user_right_types
 CREATE TABLE itmob.users
 (
     id            bigserial               NOT NULL,
-    right_id      int                     NOT NULL,
     login         varchar(100)            NOT NULL,
     "password"    varchar(100)            NOT NULL,
-    displayname   varchar(100)            NOT NULL,
+    "username"    varchar(100),
     create_date   timestamp DEFAULT NOW() NOT NULL,
-    register_date timestamp,
+    modify_date timestamp,
     reg_confirmed boolean   DEFAULT False NOT NULL,
     active        boolean   DEFAULT True  NOT NULL,
     CONSTRAINT pk_users PRIMARY KEY (id),
     CONSTRAINT unq_users UNIQUE (login)
+);
+
+CREATE TABLE itmob.user_rights
+(
+    user_id bigint NOT NULL,
+    right_id  bigint NOT NULL,
+    CONSTRAINT pk_user_rights PRIMARY KEY (right_id, user_id)
 );
 
 CREATE TABLE itmob.events

@@ -119,6 +119,11 @@ public class User {
             return this;
         }
 
+        public User.Builder setPrivacySetting(PrivacySetting privacySetting) {
+            User.this.privacySetting = privacySetting;
+            return this;
+        }
+
         public User build() {
             return User.this;
         }
