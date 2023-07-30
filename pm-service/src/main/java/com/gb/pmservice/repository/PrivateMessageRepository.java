@@ -10,5 +10,5 @@ public interface PrivateMessageRepository extends JpaRepository<PrivateMessage, 
     @Override
     List<PrivateMessage> findAll();
 
-    List<PrivateMessage> findAllByrecipientIdAndSenderId(Long recipientId, Long senderId);
+    List<PrivateMessage> findAllByrecipientIdAndSenderId(String recipientId, String senderId);
 }
