@@ -33,6 +33,10 @@ public class User {
     @JoinColumn(name = "id")
     private UserDetails userDetails;
 
+    @OneToOne
+    @JoinColumn(name = "privacy_setting_id")
+    private PrivacySetting privacySetting;
+
     @ManyToMany
     @JoinTable(
             schema = "itmob",
@@ -112,6 +116,11 @@ public class User {
 
         public User.Builder setActive(boolean active) {
             User.this.active = active;
+            return this;
+        }
+
+        public User.Builder setPrivacySetting(PrivacySetting privacySetting) {
+            User.this.privacySetting = privacySetting;
             return this;
         }
 
