@@ -4,6 +4,7 @@ import com.geekbrains.userservice.entities.PrivacySetting;
 import com.geekbrains.userservice.entities.Right;
 import com.geekbrains.userservice.entities.User;
 import com.geekbrains.userservice.entities.UserDetails;
+import com.geekbrains.userservice.mappers.PrivacySettingMapper;
 import com.geekbrains.userservice.mappers.UserMapper;
 import com.geekbrains.userservice.models.*;
 import com.geekbrains.userservice.repositories.PrivacySettingRepository;
@@ -311,14 +312,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public PrivacySettingDto getPrivacySetting(String token) {
-        PrivacySetting privacySetting = getUserById(token).getPrivacySetting();
-        return PrivacySettingDto.builder()
-                .showAge(privacySetting.getShowAge())
-                .openProfile(privacySetting.getOpenProfile())
-                .getInvitationFromSubscribers(privacySetting.getGetInvitationFromSubscribers())
-                .getInvitationFromSubscriptions(privacySetting.getGetInvitationFromSubscriptions())
-                .build();
+        return PrivacySettingMapper.MAPPER.toDto(getUserById(token).getPrivacySetting());
     }
+
     @Override
     @Transactional
     public void changePrivacySettings(String token, PrivacySettingDto privacySettingDto) {
