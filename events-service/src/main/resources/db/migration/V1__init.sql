@@ -57,9 +57,3 @@ insert into events (event_types_id, title, author, description, event_date, even
 (1, 'Jeffersons Startup', 'Jefferson', 'Здесь будет описание Jefferson Theater', '2023-08-30 12:30:06', 'Jeffersons, Москва'),
 (1, 'ITMob Startup', 'ITMob', 'Здесь будет описание Jefferson Theater', '2023-08-27 17:05:06', 'ITMob, Москва');
 
-insert into menu_list (name, photo_link, href) values
-('Главная страница', 'images_menu/558900.PNG', ''),
-('Поиск события', 'images_menu/459947.PNG', ''),
-('Добавить событие', 'images_menu/117885.PNG', ''),
-('Сообщения', 'images_menu/456501.PNG', ''),
-('Личный кабинет', 'images_menu/12126177.PNG', '');

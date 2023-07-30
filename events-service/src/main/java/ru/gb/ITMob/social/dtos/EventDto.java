@@ -19,7 +19,7 @@ public class EventDto {
     private String description;
     private Timestamp event_date;
     private String event_place;
-    private boolean isFollow;
+    private boolean isfollow;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

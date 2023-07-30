@@ -46,7 +46,7 @@ public class EventController {
             String title_id = new StringBuilder().append(p.getId()).toString();
             List<EventMembers> eventMembers = eventMembersService.findByTitleAndUsername(title_id, username);
             if (!eventMembers.isEmpty()) {
-                p.setFollow(true);
+                p.setIsfollow(true);
             }
         }
 
@@ -67,7 +67,7 @@ public class EventController {
             isFollow = true;
         }
         EventDto eventDto =  eventConverter.entityToDto(p);
-        eventDto.setFollow(isFollow);
+        eventDto.setIsfollow(isFollow);
         return eventDto;
     }
 
