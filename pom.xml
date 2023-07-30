@@ -9,6 +9,8 @@
         <module>user-service</module>
         <module>pm-service</module>
         <module>events-service</module>
+        <module>gateway-service</module>
+        <module>registry-service</module>
     </modules>
 
     <groupId>ru.gb.ITMob.social</groupId>
