@@ -1,65 +1,29 @@
-package com.geekbrains.userservice.services;
+package ru.gb.itmob.social.gatewayservice.services;
 
-import com.geekbrains.userservice.entities.User;
-import com.geekbrains.userservice.repositories.UserRepository;
-import io.jsonwebtoken.*;
-import lombok.RequiredArgsConstructor;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
-@Component
+@Service
 @ConfigurationProperties(prefix = "security")
 @PropertySource(value = "classpath:application.yml")
-@RequiredArgsConstructor
 public class TokenServiceJwtImpl implements TokenService {
-
-    private final UserRepository userRepository;
 
     @Value("${security.token.secret.key}")
     private String secretKey;
 
-    @Value("${security.token.expiration.days}")
-    private Long expirationDays;
-
-    @Override
-    public String generateToken(Authentication authentication) {
-
-        String login = authentication.getName();
-
-        List<String> authorities = authentication.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
-
-        User user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User cannot be found."));
-
-        Map<String, Object> claims = new HashMap<>(
-                Map.of(
-                        "authorities", authorities,
-                        "id", user.getId(),
-                        "username",user.getUsername(),
-                        "email", user.getUserDetails().getEmail()
-                )
-        );
-
-        return Jwts
-                .builder()
-                .setClaims(claims)
-                .setSubject(login)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationDays * 24 * 60 * 60 * 1000))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact();
-    }
+//    @Value("${security.token.expiration.days}")
+//    private Long expirationDays;
 
     @Override
     public Claims getClaims(String token) {
@@ -67,7 +31,7 @@ public class TokenServiceJwtImpl implements TokenService {
             Claims claims = Jwts
                     .parser()
                     .setSigningKey(secretKey)
-                    .parseClaimsJws(token.substring(7))
+                    .parseClaimsJws(token)
                     .getBody();
 
             Date expiration = claims.getExpiration();
@@ -98,24 +62,20 @@ public class TokenServiceJwtImpl implements TokenService {
             }
 
             return claims;
-        } catch (JwtException | IllegalArgumentException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something wrong with the token");
+
+        } catch (JwtException | IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Something wrong with jwt token");
         }
+    }
+
+    @Override
+    public Boolean isExpired(String token) {
+        return getClaims(token).getExpiration().before(new Date());
     }
 
     @Override
     public Long getId(String token) {
         return getClaims(token).get("id", Long.class);
-    }
-
-    @Override
-    public boolean isExpired(String token) {
-        return getClaims(token).getExpiration().before(new Date());
-    }
-
-    @Override
-    public boolean hasRight(String token, String right) {
-        return getClaims(token).get("authorities", List.class).contains(right);
     }
 
     @Override
@@ -132,6 +92,5 @@ public class TokenServiceJwtImpl implements TokenService {
     public String getLogin(String token) {
         return getClaims(token).getSubject();
     }
-
 
 }

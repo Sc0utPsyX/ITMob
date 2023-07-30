@@ -1,8 +1,9 @@
-INSERT INTO itmob.user_right_types ( id, name, active ) VALUES ( 0, 'WKA6S1EO14X138550', false);
-INSERT INTO itmob.user_right_types ( id, name, active ) VALUES ( 1, '4QALA8BS11P922064', false);
-INSERT INTO itmob.user_right_types ( id, name, active ) VALUES ( 2, '3DX2849512D295923', true);
-INSERT INTO itmob.user_right_types ( id, name, active ) VALUES ( 3, '5HSFQHJH11O403271', false);
-INSERT INTO itmob.user_right_types ( id, name, active ) VALUES ( 4, 'WNS46E6X11L363837', false);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 0, 'WKA6S1EO14X138550', false);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 1, '4QALA8BS11P922064', false);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 2, '3DX2849512D295923', true);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 3, '5HSFQHJH11O403271', false);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 4, 'WNS46E6X11L363837', false);
+INSERT INTO itmob.dic_rights ( id, name, active ) VALUES ( 5, 'user', true);
 INSERT INTO itmob.event_types ( id, name, description, create_date, is_default ) VALUES ( 0, '3FAYA98Y14J351761', 'Anne is walking. Anne bought new car. Tony bought new car. John is shopping. John has free time. ', '2014-08-15', false );
 INSERT INTO itmob.event_types ( id, name, description, create_date, is_default ) VALUES ( 1, '3WSA8BS215Y220644', 'Anne is walking. Anne is walking. John bought new car. Tony has free time. Anne has free time. ', '2011-04-01', false );
 INSERT INTO itmob.event_types ( id, name, description, create_date, is_default ) VALUES ( 2, '5GAF4GW016D692343', 'John bought new car. John bought new car. John bought new car. Tony has free time. Anne has free time. ', '2001-06-02', false );
