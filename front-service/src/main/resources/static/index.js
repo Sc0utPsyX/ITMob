@@ -18,6 +18,10 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
+            .when('/privacy', {
+                templateUrl: 'privacy_setting/privacy.html',
+                controller: 'privacyController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

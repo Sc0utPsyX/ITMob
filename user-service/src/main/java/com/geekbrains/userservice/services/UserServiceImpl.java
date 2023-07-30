@@ -308,6 +308,27 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    @Transactional
+    public PrivacySettingDto getPrivacySetting(String token) {
+        PrivacySetting privacySetting = getUserById(token).getPrivacySetting();
+        return PrivacySettingDto.builder()
+                .showAge(privacySetting.getShowAge())
+                .openProfile(privacySetting.getOpenProfile())
+                .getInvitationFromSubscribers(privacySetting.getGetInvitationFromSubscribers())
+                .getInvitationFromSubscriptions(privacySetting.getGetInvitationFromSubscriptions())
+                .build();
+    }
+    @Override
+    @Transactional
+    public void changePrivacySettings(String token, PrivacySettingDto privacySettingDto) {
+        PrivacySetting privacySetting = getUserById(token).getPrivacySetting();
+        privacySetting.setShowAge(privacySettingDto.getShowAge());
+        privacySetting.setOpenProfile(privacySettingDto.getOpenProfile());
+        privacySetting.setGetInvitationFromSubscribers(privacySettingDto.getGetInvitationFromSubscribers());
+        privacySetting.setGetInvitationFromSubscriptions(privacySettingDto.getGetInvitationFromSubscriptions());
+    }
+
     @Transactional
     //transactional methods must be overridable so it`s protected not private
     protected User getUserById(Long id, String token) {
@@ -340,4 +361,9 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token is expired");
         }
     }
+
+    private User getUserById(String token) {
+        return getUserById(null, token);
+    }
+
 }

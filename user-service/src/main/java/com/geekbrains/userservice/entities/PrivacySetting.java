@@ -1,8 +1,9 @@
 package com.geekbrains.userservice.entities;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 @Data
 @NoArgsConstructor
 @Entity
@@ -32,6 +33,8 @@ public class PrivacySetting {
     @Column(name = "invitation_subscriptions", nullable = false)
     Boolean getInvitationFromSubscriptions = true;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToOne(mappedBy = "privacySetting")
     User user;
 

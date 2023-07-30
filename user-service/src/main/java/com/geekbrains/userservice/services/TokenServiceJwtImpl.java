@@ -67,7 +67,7 @@ public class TokenServiceJwtImpl implements TokenService {
             Claims claims = Jwts
                     .parser()
                     .setSigningKey(secretKey)
-                    .parseClaimsJws(token)
+                    .parseClaimsJws(token.substring(7))
                     .getBody();
 
             Date expiration = claims.getExpiration();
