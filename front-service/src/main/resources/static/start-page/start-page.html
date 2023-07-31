@@ -1,3 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<html ng-app="socialnetwork">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    </script>
+</head>
+
+<body>
+<script src="http://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  window.onload = function () {
+      jQuery("#user-city").text(ymaps.geolocation.city);
+      jQuery("#user-region").text(ymaps.geolocation.region);
+   jQuery("#user-country").text(ymaps.geolocation.country);
+  }
+</script>
+<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+<div id="user-city"></div>
+<!-- <div id="user-region"></div>  -->
+<!-- <div id="user-country"></div> -->
+<p></p>
+<p></p>
 <p></p>
 <h1>ITMob</h1>
 <p>Добро пожаловать</p>
+<script src="help.js"></script>
+</body>
+</html>
