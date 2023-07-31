@@ -1,4 +1,4 @@
-angular.module('socialnetwork').controller('loginController', function ($scope, $http) {
+angular.module('socialnetwork').controller('loginController', function ($scope, $http, $localStorage) {
     $scope.tryToAuth = function () {
         $scope.user.login = $scope.user.username;
         $http.post('http://localhost:9001/auth', $scope.user)

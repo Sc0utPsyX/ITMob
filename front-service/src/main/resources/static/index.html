@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>ITMob</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
@@ -36,58 +37,29 @@
             <td width="70%">
                 <ng-view></ng-view>
             </td>
-            <td><a href="#!/login">
-                <button class="btn btn-primary">Sign In</button>
+            <td ng-show="!isUserLoggedIn()"><a href="#!/login">
+                <button class="btn btn-primary">Войти</button>
             </a></td>
             <td width="60"></td>
             <td width="1" bgcolor="a6a6a6"></td>
             <td width="30"></td>
             <td>
-                <table cellpadding="0" cellspacing="0" width="220">
-                    <tbody>
-                    <br>
-                    <tr valign="top">
-                        <td height="80"><a href=""><img src="images_menu/6128.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="80"><a href=""><p class="text-body">Анкетные данные</p></a></td>
-                    </tr>
-                    <tr valign="top">
-                        <td height="80"><a href="#!/privacy"><img src="images_menu/6128.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="80"><a href="#!/privacy"><p class="text-body">Приватность</p></a></td>
-                    </tr>
-
-                    <tr valign="top">
-                        <td height="3"><img src="images_menu/6128.png" width="30"></td>
-                        <td width="20"></td>
-                        <td height="3" margin-bottom><p style="margin-top: 0px;margin-bottom: 0px;" class="text-body">Правовая информация</p></td>
-                    </tr>
-                    <tr valign="top">
-                        <td style="padding-left: 15px;" height="3"><a href="#!/agreement"><img src="images_menu/53999.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="3"><a href="#!/agreement"><p style="margin-top: 0px;margin-bottom: 0px;" class="text-body">Пользовательское соглашение</p></a></td>
-                    </tr>
-                    <tr valign="top">
-                        <td style="padding-left: 15px;" height="80"><a href="#!/confidentiality"><img src="images_menu/53999.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="80"><a href="#!/confidentiality"><p class="text-body">Политика конфиденциальности</p></a></td>
-                    </tr>
-
-                    <tr valign="top">
-                        <td height="80"><a href="#!/contact"><img src="images_menu/6128.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="80"><a href="#!/contact"><p class="text-body">Связать с нами</p></a></td>
-                    </tr>
-                    <tr valign="top">
-                        <td height="80"><a href="#!/aboutNet"><img src="images_menu/6128.png" width="30"></a></td>
-                        <td width="20"></td>
-                        <td height="80"><a href="#!/aboutNet"><p class="text-body">Об ITMob</p></a></td>
-                    </tr>
-                    <tr valign="top">
-                        <td><button class="btn btn-danger" ng-click="tryToLogout()">Выход</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="images_menu/6128.png" width="30">
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <a ng-show="isUserLoggedIn()" class="dropdown-item" href="">Анкетные данные</a>
+                        <a ng-show="isUserLoggedIn()" class="dropdown-item" href="#!/privacy">Приватность</a>
+                        <a class="dropdown-item" href="#!/agreement">Пользовательское соглашение</a>
+                        <a class="dropdown-item" href="#!/confidentiality">Политика конфиденциальности</a>
+                        <a class="dropdown-item" href="#!/contact">Связаться с нами</a>
+                        <a class="dropdown-item" href="#!/aboutNet">Об ITMob</a>
+                        <button ng-show="isUserLoggedIn()" class="btn btn-danger" ng-click="tryToLogout()">Выход
+                        </button>
+                    </div>
+                </div>
             </td>
         </tr>
         </tbody>
