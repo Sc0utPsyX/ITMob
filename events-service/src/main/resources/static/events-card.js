@@ -13,7 +13,12 @@ angular.module('socialnetwork', []).controller('eventsCardController', function 
     $scope.eventCreate = function () {
         $scope.event.author = username;
         $http.post(contextPath + 'api/v1/events', $scope.event).then(function (response) {
+              $scope.toGoPage();
         });
+    }
+
+    $scope.toGoPage = function () {
+        document.location.href = '#!/events';
     }
 
     $scope.loadEventTypes();
