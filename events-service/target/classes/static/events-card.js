@@ -1,6 +1,6 @@
 angular.module('socialnetwork', []).controller('eventsCardController', function ($scope, $http) {
 
-    const contextPath = 'http://localhost:8906/event/';
+    const contextPath = 'http://localhost:8907/event/';
     const username = 'Bob'; //TODO передавать имя юзера
 
     $scope.loadEventTypes = function () {
