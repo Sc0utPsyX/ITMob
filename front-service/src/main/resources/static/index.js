@@ -22,7 +22,11 @@
                 templateUrl: 'events/events.html',
                 controller: 'eventsController'
             })
-            .when('/privacy', {
+            .when('/events-card', {
+                templateUrl: 'events-card/events-card.html',
+                controller: 'eventsCardController'
+            })
+            .when('/privacy_setting', {
                 templateUrl: 'privacy_setting/privacy.html',
                 controller: 'privacyController'
             })
