@@ -26,6 +26,22 @@
                 templateUrl: 'privacy_setting/privacy.html',
                 controller: 'privacyController'
             })
+            .when('/agreement', {
+                templateUrl: 'agreement/agreement.html',
+                controller: 'agreementController'
+            })
+            .when('/confidentiality', {
+                templateUrl: 'confidentiality/confidentiality.html',
+                controller: 'confidentialityController'
+            })
+            .when('/contact', {
+                templateUrl: 'contact/contact.html',
+                controller: 'contactController'
+            })
+            .when('/aboutNet', {
+                templateUrl: 'about-net/about-net.html',
+                controller: 'aboutNetController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

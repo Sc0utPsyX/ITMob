@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ru">
 <html ng-app="socialnetwork">
-
 <head>
     <meta charset="utf-8">
     <title>ITMob</title>
@@ -12,7 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
 </head>
-
 <body>
 <div ng-controller="mainController">
     <table cellpadding="0" cellspacing="0">
@@ -25,7 +23,7 @@
                     <tbody>
                     <br>
                     <tr ng-repeat="p in menuList" valign="top">
-                        <td height="80"><a href={{p.href}}><img src={{p.photo_link}} width = "30"></a></td>
+                        <td height="80"><a href={{p.href}}><img src={{p.photo_link}} width="30"></a></td>
                         <td width="20"></td>
                         <td height="80"><a href={{p.href}}><p class="text-body">{{p.name}}</p></a></td>
                     </tr>
@@ -35,9 +33,62 @@
             <td width="30"></td>
             <td width="1" bgcolor="a6a6a6"></td>
             <td width="60"></td>
-            <td width="70%"><ng-view></ng-view></td>
-            <td><a href="#!/login"><button class="btn btn-primary">Sign In</button></a></td>
+            <td width="70%">
+                <ng-view></ng-view>
+            </td>
+            <td><a href="#!/login">
+                <button class="btn btn-primary">Sign In</button>
+            </a></td>
             <td width="60"></td>
+            <td width="1" bgcolor="a6a6a6"></td>
+            <td width="30"></td>
+            <td>
+                <table cellpadding="0" cellspacing="0" width="220">
+                    <tbody>
+                    <br>
+                    <tr valign="top">
+                        <td height="80"><a href=""><img src="images_menu/6128.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="80"><a href=""><p class="text-body">Анкетные данные</p></a></td>
+                    </tr>
+                    <tr valign="top">
+                        <td height="80"><a href="#!/privacy"><img src="images_menu/6128.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="80"><a href="#!/privacy"><p class="text-body">Приватность</p></a></td>
+                    </tr>
+
+                    <tr valign="top">
+                        <td height="3"><img src="images_menu/6128.png" width="30"></td>
+                        <td width="20"></td>
+                        <td height="3" margin-bottom><p style="margin-top: 0px;margin-bottom: 0px;" class="text-body">Правовая информация</p></td>
+                    </tr>
+                    <tr valign="top">
+                        <td style="padding-left: 15px;" height="3"><a href="#!/agreement"><img src="images_menu/53999.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="3"><a href="#!/agreement"><p style="margin-top: 0px;margin-bottom: 0px;" class="text-body">Пользовательское соглашение</p></a></td>
+                    </tr>
+                    <tr valign="top">
+                        <td style="padding-left: 15px;" height="80"><a href="#!/confidentiality"><img src="images_menu/53999.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="80"><a href="#!/confidentiality"><p class="text-body">Политика конфиденциальности</p></a></td>
+                    </tr>
+
+                    <tr valign="top">
+                        <td height="80"><a href="#!/contact"><img src="images_menu/6128.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="80"><a href="#!/contact"><p class="text-body">Связать с нами</p></a></td>
+                    </tr>
+                    <tr valign="top">
+                        <td height="80"><a href="#!/aboutNet"><img src="images_menu/6128.png" width="30"></a></td>
+                        <td width="20"></td>
+                        <td height="80"><a href="#!/aboutNet"><p class="text-body">Об ITMob</p></a></td>
+                    </tr>
+                    <tr valign="top">
+                        <td><button class="btn btn-danger" ng-click="tryToLogout()">Выход</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -49,4 +100,8 @@
 <script src="login/login.js"></script>
 <script src="register/register.js"></script>
 <script src="privacy_setting/privacy.js"></script>
+<script src="agreement/agreement.js"></script>
+<script src="confidentiality/confidentiality.js"></script>
+<script src="contact/contact.js"></script>
+<script src="about-net/about-net.js"></script>
 </html>
