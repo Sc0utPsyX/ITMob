@@ -40,14 +40,12 @@
             <td ng-show="!isUserLoggedIn()"><a href="#!/login">
                 <button class="btn btn-primary">Войти</button>
             </a></td>
-            <td width="60"></td>
-            <td width="1" bgcolor="a6a6a6"></td>
-            <td width="30"></td>
+            <td width="20"></td>
             <td>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="images_menu/6128.png" width="30">
+                        <img src="images_menu/6128.png" width="20">
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <a ng-show="isUserLoggedIn()" class="dropdown-item" href="">Анкетные данные</a>
@@ -56,11 +54,11 @@
                         <a class="dropdown-item" href="#!/confidentiality">Политика конфиденциальности</a>
                         <a class="dropdown-item" href="#!/contact">Связаться с нами</a>
                         <a class="dropdown-item" href="#!/aboutNet">Об ITMob</a>
-                        <button ng-show="isUserLoggedIn()" class="btn btn-danger" ng-click="tryToLogout()">Выход
-                        </button>
+                        <button ng-show="isUserLoggedIn()" class="btn btn-danger" ng-click="tryToLogout()">Выход</button>
                     </div>
                 </div>
             </td>
+            <td width="60"></td>
         </tr>
         </tbody>
     </table>
