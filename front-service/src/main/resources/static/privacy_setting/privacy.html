@@ -15,12 +15,15 @@
                 <div class="card-body d-flex flex-column">
                     <h2>Настройка приватности</h2>
                     <form method="put" ng-submit="changePrivacy()">
+                        <p>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="showAge" ng-model="privacy.showAge">
                             <label class="form-check-label">
                                 Отображать возраст
                             </label>
                         </div>
+                        </p>
+                        <p>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="openProfile"
                                    ng-model="privacy.openProfile">
@@ -28,6 +31,8 @@
                                 Открытый профиль
                             </label>
                         </div>
+                        </p>
+                        <p>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="getInvitationFromSubscribers"
                                    ng-model="privacy.getInvitationFromSubscribers">
@@ -35,6 +40,8 @@
                                 Получать приглашения от подписчиков
                             </label>
                         </div>
+                        </p>
+                        <p>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="getInvitationFromSubscriptions"
                                    ng-model="privacy.getInvitationFromSubscriptions">
@@ -42,9 +49,12 @@
                                 Получать сообщения от подписок
                             </label>
                         </div>
+                        </p>
+                        <p>
                         <div class="mb-3">
                             <button class="btn btn-secondary" type="submit">Сохранить настройки</button>
                         </div>
+                        </p>
                     </form>
                 </div>
             </div>
