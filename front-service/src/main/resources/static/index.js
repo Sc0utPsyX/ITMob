@@ -21,6 +21,9 @@
             .when('/events', {
                 templateUrl: 'events/events.html',
                 controller: 'eventsController'
+            .when('/privacy', {
+                templateUrl: 'privacy_setting/privacy.html',
+                controller: 'privacyController'
             })
           .when('/events-card', {
                 templateUrl: 'events-card/events-card.html',

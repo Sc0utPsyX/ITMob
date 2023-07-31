@@ -1,117 +1,155 @@
 CREATE SCHEMA IF NOT EXISTS itmob;
 
 CREATE DOMAIN itmob.gender CHAR(1)
-CHECK (value IN ('F','M'));;
+    CHECK (value IN ('F', 'M'));;
 
-CREATE  TABLE itmob.event_types ( 
-	id                   serial  NOT NULL  ,
-	name                 varchar(300)    ,
-	description          text  NOT NULL  ,
-	create_date          date DEFAULT CURRENT_DATE NOT NULL  ,
-	is_default           boolean DEFAULT False NOT NULL  ,
-	CONSTRAINT pk_event_types PRIMARY KEY ( id ),
-	CONSTRAINT unq_event_types UNIQUE ( name ) 
- );
+CREATE TABLE itmob.event_types
+(
+    id          serial                       NOT NULL,
+    name        varchar(300),
+    description text                         NOT NULL,
+    create_date date    DEFAULT CURRENT_DATE NOT NULL,
+    is_default  boolean DEFAULT False        NOT NULL,
+    CONSTRAINT pk_event_types PRIMARY KEY (id),
+    CONSTRAINT unq_event_types UNIQUE (name)
+);
 
-CREATE  TABLE itmob.user_right_types ( 
-	id                   serial  NOT NULL  ,
-	name                 varchar(255)  NOT NULL  ,
-	active               boolean DEFAULT False NOT NULL  ,
-	CONSTRAINT pk_dic_rights PRIMARY KEY ( id ),
-	CONSTRAINT unq_right_types UNIQUE ( name ) 
- );
+CREATE TABLE itmob.dic_rights
+(
+    id     serial                NOT NULL,
+    name   varchar(255)          NOT NULL,
+    active boolean DEFAULT False NOT NULL,
+    CONSTRAINT pk_dic_rights PRIMARY KEY (id),
+    CONSTRAINT unq_right_types UNIQUE (name)
+);
 
-CREATE  TABLE itmob.users ( 
-	id                   bigserial  NOT NULL  ,
-	right_id             int  NOT NULL  ,
-	login                varchar(100)  NOT NULL  ,
-	"password"           varchar(100)  NOT NULL  ,
-	displayname          varchar(100)  NOT NULL  ,
-	create_date          timestamp DEFAULT NOW() NOT NULL  ,
-	register_date        timestamp    ,
-	reg_confirmed        boolean DEFAULT False NOT NULL  ,
-	active               boolean DEFAULT True NOT NULL  ,
-	CONSTRAINT pk_users PRIMARY KEY ( id ),
-	CONSTRAINT unq_users UNIQUE ( login ) 
- );
+CREATE TABLE itmob.users
+(
+    id            bigserial               NOT NULL,
+    login         varchar(100)            NOT NULL,
+    "password"    varchar(100)            NOT NULL,
+    "username"    varchar(100),
+    create_date   timestamp DEFAULT NOW() NOT NULL,
+    modify_date timestamp,
+    reg_confirmed boolean   DEFAULT False NOT NULL,
+    active        boolean   DEFAULT True  NOT NULL,
+    CONSTRAINT pk_users PRIMARY KEY (id),
+    CONSTRAINT unq_users UNIQUE (login)
+);
 
-CREATE  TABLE itmob.events ( 
-	id                   bigserial  NOT NULL  ,
-	event                varchar(250)  NOT NULL  ,
-	description          text  NOT NULL  ,
-	create_date          timestamp DEFAULT NOW NOT NULL  ,
-	update_date			 timestamp DEFAULT NOW NOT NULL  ,
-	owner_id             bigint  NOT NULL  ,
-	event_date           timestamp  NOT NULL  ,
-	event_type           int  NOT NULL  ,
-	CONSTRAINT pk_events PRIMARY KEY ( id )
- );
+CREATE TABLE itmob.user_rights
+(
+    user_id bigint NOT NULL,
+    right_id  bigint NOT NULL,
+    CONSTRAINT pk_user_rights PRIMARY KEY (right_id, user_id)
+);
 
-CREATE  TABLE itmob.user_details ( 
-	user_id              bigint  NOT NULL  ,
-	about                varchar(4000)    ,
-	address              varchar(1000)    ,
-	city                 varchar(255)    ,
-	sex                  itmob.gender    ,
-	birth_date           date    ,
-	email                varchar(200)  NOT NULL  ,
-	CONSTRAINT pk_user_details PRIMARY KEY ( user_id )
- );
+CREATE TABLE itmob.events
+(
+    id          bigserial             NOT NULL,
+    event       varchar(250)          NOT NULL,
+    description text                  NOT NULL,
+    create_date timestamp DEFAULT NOW() NOT NULL,
+    update_date timestamp DEFAULT NOW() NOT NULL,
+    owner_id    bigint                NOT NULL,
+    event_date  timestamp             NOT NULL,
+    event_type  int                   NOT NULL,
+    CONSTRAINT pk_events PRIMARY KEY (id)
+);
 
-CREATE  TABLE itmob.user_messages ( 
-	id                   bigserial  NOT NULL  ,
-	recipient_id         bigint  NOT NULL  ,
-	sender_id            bigint  NOT NULL  ,
-	message              varchar(4000)  NOT NULL  ,
-	create_date          timestamp DEFAULT NOW() NOT NULL  ,
-	CONSTRAINT pk_user_sent_messages PRIMARY KEY ( id )
- );
+CREATE TABLE itmob.user_details
+(
+    user_id    bigint       NOT NULL,
+    about      varchar(4000),
+    address    varchar(1000),
+    city       varchar(255),
+    sex        itmob.gender,
+    birth_date date,
+    email      varchar(200) NOT NULL,
+    CONSTRAINT pk_user_details PRIMARY KEY (user_id)
+);
 
-CREATE  TABLE itmob.event_comments ( 
-	id                   bigserial  NOT NULL  ,
-	event_id             bigint  NOT NULL  ,
-	"comment"            varchar(4000)  NOT NULL  ,
-	create_date          timestamp DEFAULT NOW() NOT NULL  ,
-	owner_id             bigint  NOT NULL  ,
-	parent_id            bigint    ,
-	CONSTRAINT pk_event_comments PRIMARY KEY ( id )
- );
+CREATE TABLE itmob.user_messages
+(
+    id           bigserial               NOT NULL,
+    recipient_id bigint                  NOT NULL,
+    sender_id    bigint                  NOT NULL,
+    message      varchar(4000)           NOT NULL,
+    create_date  timestamp DEFAULT NOW() NOT NULL,
+    CONSTRAINT pk_user_sent_messages PRIMARY KEY (id)
+);
 
-CREATE  TABLE itmob.event_location ( 
-	event_id             bigserial  NOT NULL  ,
-	address              varchar(250)    ,
-	coordinates          point    ,
-	detail               varchar(2000)    ,
-	CONSTRAINT pk_event_location PRIMARY KEY ( event_id )
- );
+CREATE TABLE itmob.event_comments
+(
+    id          bigserial               NOT NULL,
+    event_id    bigint                  NOT NULL,
+    "comment"   varchar(4000)           NOT NULL,
+    create_date timestamp DEFAULT NOW() NOT NULL,
+    owner_id    bigint                  NOT NULL,
+    parent_id   bigint,
+    CONSTRAINT pk_event_comments PRIMARY KEY (id)
+);
 
-CREATE  TABLE itmob.event_members ( 
-	event_id             bigint  NOT NULL  ,
-	user_id              bigint  NOT NULL  ,
-	CONSTRAINT pk_event_members PRIMARY KEY ( event_id, user_id )
- );
+CREATE TABLE itmob.event_location
+(
+    event_id    bigserial NOT NULL,
+    address     varchar(250),
+    coordinates point,
+    detail      varchar(2000),
+    CONSTRAINT pk_event_location PRIMARY KEY (event_id)
+);
 
-ALTER TABLE itmob.event_comments ADD CONSTRAINT fk_event_comments_event_id FOREIGN KEY ( event_id ) REFERENCES itmob.events( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+CREATE TABLE itmob.event_members
+(
+    event_id bigint NOT NULL,
+    user_id  bigint NOT NULL,
+    CONSTRAINT pk_event_members PRIMARY KEY (event_id, user_id)
+);
 
-ALTER TABLE itmob.event_comments ADD CONSTRAINT fk_event_comments_owner_id FOREIGN KEY ( owner_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.event_comments
+    ADD CONSTRAINT fk_event_comments_event_id FOREIGN KEY (event_id) REFERENCES itmob.events (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.event_location ADD CONSTRAINT fk_event_location_event_id FOREIGN KEY ( event_id ) REFERENCES itmob.events( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.event_comments
+    ADD CONSTRAINT fk_event_comments_owner_id FOREIGN KEY (owner_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.event_members ADD CONSTRAINT fk_event_member_id FOREIGN KEY ( user_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.event_location
+    ADD CONSTRAINT fk_event_location_event_id FOREIGN KEY (event_id) REFERENCES itmob.events (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.event_members ADD CONSTRAINT fk_event_members_event FOREIGN KEY ( event_id ) REFERENCES itmob.events( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.event_members
+    ADD CONSTRAINT fk_event_member_id FOREIGN KEY (user_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.events ADD CONSTRAINT fk_event_user_id FOREIGN KEY ( owner_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.event_members
+    ADD CONSTRAINT fk_event_members_event FOREIGN KEY (event_id) REFERENCES itmob.events (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.events ADD CONSTRAINT fk_event_type_id FOREIGN KEY ( event_type ) REFERENCES itmob.event_types( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.events
+    ADD CONSTRAINT fk_event_user_id FOREIGN KEY (owner_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.user_details ADD CONSTRAINT fk_user_details_users FOREIGN KEY ( user_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.events
+    ADD CONSTRAINT fk_event_type_id FOREIGN KEY (event_type) REFERENCES itmob.event_types (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.user_messages ADD CONSTRAINT fk_user_messages_users_recipient FOREIGN KEY ( recipient_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.user_details
+    ADD CONSTRAINT fk_user_details_users FOREIGN KEY (user_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.user_messages ADD CONSTRAINT fk_user_messages_users_sender FOREIGN KEY ( sender_id ) REFERENCES itmob.users( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.user_messages
+    ADD CONSTRAINT fk_user_messages_users_recipient FOREIGN KEY (recipient_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE itmob.users ADD CONSTRAINT fk_user_right_id FOREIGN KEY ( right_id ) REFERENCES itmob.user_right_types( id ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE itmob.user_messages
+    ADD CONSTRAINT fk_user_messages_users_sender FOREIGN KEY (sender_id) REFERENCES itmob.users (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE itmob.users
+    ADD CONSTRAINT fk_user_right_id FOREIGN KEY (right_id) REFERENCES itmob.user_right_types (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE itmob.privacy_settings
+(
+    id                     bigserial PRIMARY KEY,
+    show_age               bool not null default true,
+    open_profile           bool not null default true,
+    invitation_subscribers bool not null default true,
+    invitation_subscriptions bool not null default true
+);
+
+ALTER TABLE itmob.users
+    ADD COLUMN privacy_setting_id bigint REFERENCES itmob.privacy_settings(id);
 
 COMMENT ON CONSTRAINT fk_event_comments_owner_id ON itmob.event_comments IS 'Владелец комментария';
 

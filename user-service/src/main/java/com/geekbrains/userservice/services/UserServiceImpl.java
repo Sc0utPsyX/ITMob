@@ -1,10 +1,13 @@
 package com.geekbrains.userservice.services;
 
+import com.geekbrains.userservice.entities.PrivacySetting;
 import com.geekbrains.userservice.entities.Right;
 import com.geekbrains.userservice.entities.User;
 import com.geekbrains.userservice.entities.UserDetails;
+import com.geekbrains.userservice.mappers.PrivacySettingMapper;
 import com.geekbrains.userservice.mappers.UserMapper;
 import com.geekbrains.userservice.models.*;
+import com.geekbrains.userservice.repositories.PrivacySettingRepository;
 import com.geekbrains.userservice.repositories.RightRepository;
 import com.geekbrains.userservice.repositories.UserDetailsRepository;
 import com.geekbrains.userservice.repositories.UserRepository;
@@ -34,6 +37,7 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
+    private final PrivacySettingRepository privacySettingRepository;
 
     @Override
     public AuthResponse authenticate(@RequestBody AuthRequest authRequest) {
@@ -122,6 +126,7 @@ public class UserServiceImpl implements UserService {
                 .setModifyDate(null) //@UpdateTimestamp
                 .setActive(true)
                 .setRegConfirmed(false)
+                .setPrivacySetting(privacySettingRepository.save(new PrivacySetting()))
                 .build();
 
         user = userRepository.save(user);
@@ -304,6 +309,22 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    @Transactional
+    public PrivacySettingDto getPrivacySetting(String token) {
+        return PrivacySettingMapper.MAPPER.toDto(getUserById(token).getPrivacySetting());
+    }
+
+    @Override
+    @Transactional
+    public void changePrivacySettings(String token, PrivacySettingDto privacySettingDto) {
+        PrivacySetting privacySetting = getUserById(token).getPrivacySetting();
+        privacySetting.setShowAge(privacySettingDto.getShowAge());
+        privacySetting.setOpenProfile(privacySettingDto.getOpenProfile());
+        privacySetting.setGetInvitationFromSubscribers(privacySettingDto.getGetInvitationFromSubscribers());
+        privacySetting.setGetInvitationFromSubscriptions(privacySettingDto.getGetInvitationFromSubscriptions());
+    }
+
     @Transactional
     //transactional methods must be overridable so it`s protected not private
     protected User getUserById(Long id, String token) {
@@ -336,4 +357,9 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token is expired");
         }
     }
+
+    private User getUserById(String token) {
+        return getUserById(null, token);
+    }
+
 }

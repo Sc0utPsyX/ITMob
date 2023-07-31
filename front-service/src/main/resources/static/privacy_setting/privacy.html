@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/Login-Form-Basic-icons.css">
+</head>
+<body>
+<div class="container" ng-controller="privacyController">
+    <div class="row d-flex justify-content-center">
+        <div class="col">
+            <div class="card mb-5">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h2>Privacy Settings</h2>
+                    <form class="text-center" method="put" ng-submit="changePrivacy()">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="showAge" ng-model="privacy.showAge">
+                            <label class="form-check-label">
+                                Show Age
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="openProfile"
+                                   ng-model="privacy.openProfile">
+                            <label class="form-check-label">
+                                Open Profile
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="getInvitationFromSubscribers"
+                                   ng-model="privacy.getInvitationFromSubscribers">
+                            <label class="form-check-label">
+                                Get Invitation From Subscribers
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="getInvitationFromSubscriptions"
+                                   ng-model="privacy.getInvitationFromSubscriptions">
+                            <label class="form-check-label">
+                                Get Invitation From Subscriptions
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-block w-100" type="submit">Change settings</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="privacy.js"></script>
+</body>
+</html>

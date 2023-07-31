@@ -11,4 +11,7 @@ public interface UserService {
     UserDto changePassword(UserPassChgReq userPassChgReq, String token);
     UserDto viewUser(Long id, String token);
     Boolean deleteUser(Long id, String token);
+    PrivacySettingDto getPrivacySetting(String token);
+    void changePrivacySettings(String token, PrivacySettingDto privacySettingDto);
+
 }
