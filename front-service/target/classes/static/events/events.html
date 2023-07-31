@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ru">
+<html ng-app="socialnetwork">
 
 <head>
     <meta charset="utf-8">
@@ -111,8 +112,8 @@
                 <p><b>{{getOnlyTime(p.event_date)}}</b></p>
             </td>
             <td>
-                <button type="button" ng-show = "!p.isFollow" class="btn btn-secondary" ng-click="followToEvent(p)">Участвовать</button>
-                <button type="button" ng-show = "p.isFollow" class="btn btn-danger" ng-click="deleteFollowToEvent(p)">Отписаться</button>
+                <button type="button" ng-show = "!p.isfollow" class="btn btn-secondary" ng-click="followToEvent(p)">Участвовать</button>
+                <button type="button" ng-show = "p.isfollow" class="btn btn-danger" ng-click="deleteFollowToEvent(p)">Отписаться</button>
                 <button type="button" ng-show = "isUserAdmin()" class="btn btn-danger" ng-click="showFollowToEvent(p)">Тест</button>
                 <button type="button" ng-show="isUserAdmin()" class="btn btn-danger" ng-click="deleteEventById(p)">Удалить событие</button>
             </td>

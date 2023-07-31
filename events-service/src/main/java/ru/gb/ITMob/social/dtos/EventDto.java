@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class EventDto {
     private Long id;
     private EventTypes event_types_id;
+    private String event_types_name;
     private String title;
     private String author;
     private String description;

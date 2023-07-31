@@ -47,7 +47,7 @@ public class EventService {
         event.setDescription(eventDto.getDescription());
         event.setEvent_date(eventDto.getEvent_date());
         event.setEvent_place(eventDto.getEvent_place());
-        EventTypes e = eventTypesService.findById(eventDto.getEvent_types_id().getId()).orElseThrow(() -> new ResourceNotFoundException("Тип события не найден"));
+        EventTypes e = eventTypesService.findByName(eventDto.getEvent_types_name()).orElseThrow(() -> new ResourceNotFoundException("Тип события не найден"));
         event.setEvent_types_id(e);
         eventRepository.save(event);
         return event;

@@ -22,6 +22,10 @@
                 templateUrl: 'events/events.html',
                 controller: 'eventsController'
             })
+          .when('/events-card', {
+                templateUrl: 'events-card/events-card.html',
+                controller: 'eventsCardController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

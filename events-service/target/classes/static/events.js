@@ -1,4 +1,4 @@
-angular.module('socialnetwork').controller('eventsController', function ($scope, $http) {
+angular.module('socialnetwork', []).controller('eventsController', function ($scope, $http) {
 
     const contextPath = 'http://localhost:8906/event/';
     const username = 'Bob'; //TODO передавать имя юзера
@@ -124,7 +124,7 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
         });
     };
 
-    $scope.showxFollowToEvent = function (event) {
+    $scope.showFollowToEvent = function (event) {
         $http({
             url: contextPath + 'find_event_members',
             method: 'GET',
