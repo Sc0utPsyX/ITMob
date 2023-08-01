@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>ITMob</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
@@ -40,14 +40,12 @@
             <td ng-show="!isUserLoggedIn()"><a href="#!/login">
                 <button class="btn btn-primary">Войти</button>
             </a></td>
-            <td width="60"></td>
-            <td width="1" bgcolor="a6a6a6"></td>
-            <td width="30"></td>
+            <td width="20"></td>
             <td>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenu2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="images_menu/6128.png" width="30">
+                        <img src="images_menu/612899.png" width="20">
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <a ng-show="isUserLoggedIn()" class="dropdown-item" href="">Анкетные данные</a>
@@ -56,11 +54,11 @@
                         <a class="dropdown-item" href="#!/confidentiality">Политика конфиденциальности</a>
                         <a class="dropdown-item" href="#!/contact">Связаться с нами</a>
                         <a class="dropdown-item" href="#!/aboutNet">Об ITMob</a>
-                        <button ng-show="isUserLoggedIn()" class="btn btn-danger" ng-click="tryToLogout()">Выход
-                        </button>
+                        <button ng-show="isUserLoggedIn()" class="btn btn-danger" ng-click="tryToLogout()">Выход</button>
                     </div>
                 </div>
             </td>
+            <td width="60"></td>
         </tr>
         </tbody>
     </table>
