@@ -10,7 +10,7 @@ import ru.gb.ITMob.social.front.services.MenuListService;
 @RequiredArgsConstructor
 public class MenuListConverter {
     public MenuListDto entityToDto(MenuList menuList) {
-        return new MenuListDto(menuList.getId(), menuList.getName(), menuList.getPhoto_link(), menuList.getHref());
+        return new MenuListDto(menuList.getId(), menuList.getName(), menuList.getPhoto_link(), menuList.getHref(), menuList.isVisibility());
     }
 
     public MenuList dtoToEntity(MenuListDto menuListDto) {
@@ -19,6 +19,7 @@ public class MenuListConverter {
         p.setName(menuListDto.getName());
         p.setPhoto_link(menuListDto.getPhoto_link());
         p.setHref(menuListDto.getHref());
+        p.setVisibility(menuListDto.isVisibility());
         return p;
     }
 }

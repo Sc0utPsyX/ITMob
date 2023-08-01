@@ -1,4 +1,9 @@
 angular.module('socialnetwork').controller('registerController', function ($scope, $http, $localStorage) {
+
+    $scope.toGoPage = function () {
+        document.location.href = '#!/profile';
+    }
+
     //@TODO 12.07.2023 Дождаться получения токена сразу после регистрации, либо переделать на редирект к login.html
     $scope.tryToRegister = function () {
         $scope.user.login = $scope.user.username;
@@ -9,6 +14,7 @@ angular.module('socialnetwork').controller('registerController', function ($scop
                     $localStorage.itMobUser = {username: $scope.user.username, token: response.data.token};
                     $scope.user.username = null;
                     $scope.user.password = null;
+                    $scope.toGoPage();
                 }
             }, function errorCallback(response) {
             });
