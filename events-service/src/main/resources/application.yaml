@@ -10,13 +10,13 @@ spring:
     url: jdbc:postgresql://localhost:5433/it_mob_event
     username: user
     password: pass
-    jpa:
-      show-sql: false
-      hibernate:
-        ddl-auto: validate
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-      open-in-view: true
-    flyway:
-      enabled: true
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: true
+  flyway:
+    enabled: true
 
 
