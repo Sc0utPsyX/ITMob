@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = "itmob", name = "dic_rights")
+@Table(name = "dic_rights")
 public class Right {
 
     @Id

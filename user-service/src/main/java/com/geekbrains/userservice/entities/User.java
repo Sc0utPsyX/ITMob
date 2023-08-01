@@ -10,9 +10,8 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
 @Entity
-@Table(schema = "itmob", name = "users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -39,7 +38,6 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            schema = "itmob",
             name = "user_rights",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "right_id")

@@ -26,7 +26,7 @@
                 templateUrl: 'events-card/events-card.html',
                 controller: 'eventsCardController'
             })
-            .when('/privacy_setting', {
+            .when('/privacy', {
                 templateUrl: 'privacy_setting/privacy.html',
                 controller: 'privacyController'
             })

@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
         List<Right> rights = new ArrayList<>();
 
         //admin can set rights during registration
-        if (token != null && tokenService.hasRight(token, "admin")) {
+        if (StringUtils.hasText(token) && tokenService.hasRight(token, "admin")) {
             isAdmin = true;
             List<String> prefRoles = userRegReq.getRights();
 
