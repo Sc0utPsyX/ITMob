@@ -7,7 +7,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(schema = "itmob", name = "privacy_settings")
+@Table(name = "privacy_settings")
 public class PrivacySetting {
 
     @Id
