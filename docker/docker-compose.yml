@@ -1,0 +1,59 @@
+version: '3.2'
+
+volumes:
+  postgres_nya:
+    driver: local
+
+services:
+
+  it_mob_event:
+    image: library/postgres:latest
+    container_name: it_mob_event
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_DB: it_mob_event
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5433:5432
+
+  it_mob_front:
+    image: library/postgres:latest
+    container_name: it_mob_front
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_DB: it_mob_front
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5434:5432
+
+  it_mob_pm:
+    image: library/postgres:latest
+    container_name: it_mob_pm
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_DB: it_mob_pm
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5435:5432
+
+  it_mob_user:
+    image: library/postgres:latest
+    container_name: it_mob_user
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_DB: it_mob_user
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - 5436:5432
