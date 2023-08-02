@@ -24,7 +24,7 @@
                 <table cellpadding="0" cellspacing="0" width="220">
                     <tbody>
                     <br>
-                    <tr ng-repeat="p in menuList" valign="top">
+                    <tr ng-repeat="p in menuList" valign="top" ng-show="p.visibility || isUserLoggedIn()">
                         <td height="80"><a href={{p.href}}><img src={{p.photo_link}} width="30"></a></td>
                         <td width="20"></td>
                         <td height="80"><a href={{p.href}}><p class="text-body">{{p.name}}</p></a></td>
@@ -49,7 +49,7 @@
                         <img src="images_menu/612899.png" width="20">
                     </button>
                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu2">
-                        <a ng-show="isUserLoggedIn()" class="dropdown-item" href="">Анкетные данные</a>
+                        <!-- TODO <a ng-show="isUserLoggedIn()" class="dropdown-item" href="">Анкетные данные</a>-->
                         <a ng-show="isUserLoggedIn()" class="dropdown-item" href="#!/privacy">Приватность</a>
                         <a class="dropdown-item" href="#!/agreement">Пользовательское соглашение</a>
                         <a class="dropdown-item" href="#!/confidentiality">Политика конфиденциальности</a>
@@ -69,6 +69,7 @@
 <script src="start-page/start-page.js"></script>
 <script src="login/login.js"></script>
 <script src="register/register.js"></script>
+<script src="profile/profile.js"></script>
 <script src="events/events.js"></script>
 <script src="events-card/events-card.js"></script>
 <script src="privacy_setting/privacy.js"></script>

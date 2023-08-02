@@ -18,6 +18,10 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
+            .when('/profile', {
+                templateUrl: 'profile/profile.html',
+                controller: 'profileController'
+            })
             .when('/events', {
                 templateUrl: 'events/events.html',
                 controller: 'eventsController'
@@ -78,7 +82,7 @@ angular.module('socialnetwork').controller('mainController', function ($rootScop
    $scope.loadMenuList = function () {
         $http.get(contextPath + 'api/v1/menu_list').then(function (response) {
             $scope.menuList = response.data;
-            //console.log(response.data);
+            console.log(response.data);
        });
      }
 
