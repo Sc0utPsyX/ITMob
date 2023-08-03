@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface EventMembersRepository extends JpaRepository<EventMembers, Long> {
     List<EventMembers> findByTitleAndUsername(String title, String username);
+
+    List<EventMembers> findByTitle(String title);
     void deleteById(long id);
 }

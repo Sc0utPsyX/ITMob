@@ -13,16 +13,12 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class EventMembersService {
-    private final EventService eventService;
     private final EventMembersRepository eventMembersRepository;
 
-    @Transactional
-    public EventMembers createEventMembers(long id, String username) {
+    public EventMembers createEventMembers(Event event , String username) {
         EventMembers eventMembers = new EventMembers();
-        Event p = eventService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Событие не найдено, id: " + id));
-        eventMembers.setEvent(p);
-        String title_id = new StringBuilder().append(id).toString();
-        eventMembers.setTitle(title_id);
+        eventMembers.setEvent(event);
+        eventMembers.setTitle(event.getId().toString());
         eventMembers.setUsername(username);
         eventMembersRepository.save(eventMembers);
         return eventMembers;
@@ -34,6 +30,10 @@ public class EventMembersService {
 
     public List<EventMembers> findByTitleAndUsername(String title, String username) {
         return eventMembersRepository.findByTitleAndUsername(title, username);
+    }
+
+    public List<EventMembers> findByTitle(String title) {
+        return eventMembersRepository.findByTitle(title);
     }
 
     public void deleteById(long event_id){

@@ -12,6 +12,10 @@ public class EventSpecifications {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.get(title), String.format("%%%s%%", titlePart));
     }
 
+    public static Specification<Event> valueEqual(String valueName, Boolean valuePart) {
+        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get(valueName), valuePart);
+    }
+
     public static Specification<Event> eventTypesLike(List<EventTypes> eventTypesPart) {
         return (root, criteriaQuery, criteriaBuilder) -> root.get("event_types_id").in(eventTypesPart);
     }
