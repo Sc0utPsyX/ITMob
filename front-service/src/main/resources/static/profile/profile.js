@@ -185,23 +185,8 @@ angular.module('socialnetwork').controller('profileController', function ($rootS
        return day + ', ' +  date + ' ' + month;
 
     }
-
-    $scope.getEmail = function () {
-               $http({
-                   url: contextPathUser + 'details',
-                   method: 'GET',
-                   params: {
-                       "username": $localStorage.itMobUser.username
-                   }
-               }).then(function (response) {
-                   $scope.email = response.data;
-                   console.log(response.data);
-               });
-    };
-
     $scope.loadEventTypes();
     $scope.loadEvents();
-    $scope.getEmail();
 
 });
 
