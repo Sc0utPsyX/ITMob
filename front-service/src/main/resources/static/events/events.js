@@ -1,7 +1,6 @@
-angular.module('socialnetwork').controller('eventsController', function ($scope, $http) {
+angular.module('socialnetwork').controller('eventsController', function ($rootScope, $scope, $http, $location, $localStorage) {
 
     const contextPath = 'http://localhost:8907/event/';
-    const username = 'Bob'; //TODO передавать имя юзера
 
     $scope.loadEventTypes = function () {
         $http.get(contextPath + 'api/v1/event_types').then(function (response) {
@@ -58,7 +57,7 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
             params: {
                 "event_types_name": out,
                 "event_place": event_place,
-                "username": username,
+                "username": $localStorage.itMobUser.username,
                 "p": pageIndex
             }
         }).then(function (response) {
@@ -74,7 +73,7 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
              url: contextPath + 'api/v1/events/' + event.id,
              method: 'GET',
              params: {
-                 "username": username
+                 "username": $localStorage.itMobUser.username
              }
          }).then(function (response) {
             alert(response.data.description);
@@ -83,7 +82,13 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
     }
 
     $scope.deleteEventById = function (event) {
-        $http.delete(contextPath + 'api/v1/events/' + event.id).then(function (response) {
+        $http({
+            url: contextPath + 'api/v1/events/' + event.id,
+            method: 'DELETE',
+            params: {
+                "username": $localStorage.itMobUser.username
+                }
+        }).then(function (response) {
             $scope.loadEvents();
         });
     }
@@ -103,7 +108,7 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
             method: 'POST',
             params: {
                 "event_id": event.id,
-                "username": username
+                "username": $localStorage.itMobUser.username
             }
         }).then(function (response) {
             event.isfollow = true;
@@ -117,20 +122,20 @@ angular.module('socialnetwork').controller('eventsController', function ($scope,
             method: 'DELETE',
             params: {
                 "event_id": event.id,
-                "username": username
+                "username": $localStorage.itMobUser.username
             }
         }).then(function (response) {
             event.isfollow = false;
         });
     };
 
-    $scope.showxFollowToEvent = function (event) {
+    $scope.showFollowToEvent = function (event) {
         $http({
             url: contextPath + 'find_event_members',
             method: 'GET',
             params: {
                 "event_id": event.id,
-                "username": username
+                "username": $localStorage.itMobUser.username
             }
         }).then(function (response) {
             alert (response.data == "[object Object]");

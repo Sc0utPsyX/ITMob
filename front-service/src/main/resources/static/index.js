@@ -82,7 +82,7 @@ angular.module('socialnetwork').controller('mainController', function ($rootScop
    $scope.loadMenuList = function () {
         $http.get(contextPath + 'api/v1/menu_list').then(function (response) {
             $scope.menuList = response.data;
-            console.log(response.data);
+            //console.log(response.data);
        });
      }
 

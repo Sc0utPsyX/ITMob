@@ -12,10 +12,122 @@
 
 <body>
 <div class="container" ng-controller="profileController">
-   <p></p>
-    <h1>ITMob</h1>
-    <p>Личный кабинет</p>
+    <br>
+    <table class="container" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td>
+                <h4>Мои события</h4>
+            </td>
+            <td>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex=actualPageIndex ng-click="loadEvents(actualPageIndex-1)">Previous</a>
+                        </li>
+                        <li class="page-item" ng-repeat="pageIndex in pagesList">
+                            <a class="page-link" href="#" ng-click="loadEvents(pageIndex)">{{pageIndex}}</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex=actualPageIndex ng-click="loadEvents(actualPageIndex + 1)">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                    <img src="events/images_filter/png-filter-icon.png" width = "30">
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Фильтр по типу событий и городу</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-check form-check-inline" ng-repeat="p in eventTypesList">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox" value={{p.name}} checked = "true">
+                                    <label class="form-check-label" for="inlineCheckbox">{{p.name}}</label>
+                                    &nbsp;<button type="button" class="btn btn-info" ng-click="showEventTypesInfo(p.description_full)">?</button>
+                                </div>
+                                <p></p>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Поиск по городу" name = "event_place">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="modalBodyClose()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td ng-show="isUserAdmin()" >ID</td>
+            <td>Дата события</td>
+            <td>Событие</td>
+            <td>Подписчики</td>
+            <td>Место и время</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="p in eventsPage.items" ng-show = "p.isfollow">
+            <td>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" ng-click="showEventInfo(p)">?</button></td>
+            <td ng-show="isUserAdmin()">{{p.id}}</td>
+            <td><b>{{getOnlyDay(p.event_date)}}</b></td>
+            <td>
+                <p><b>{{p.title}}</b></p>
+                <p>Автор: {{p.author}}</p>
+            </td>
+            <td>
+                <!-- Button trigger modal -->
+                <button type class="btn btn-light"data-toggle="modal" data-target="#exampleModalLong" ng-click="findFollowers(p)">
+                    <img src="profile/images_profile/png-followers.png" width = "30">
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Подписчики события</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" ng-repeat="f in followers">
+                                <b>{{f.username}}</b>&nbsp;&nbsp;<a class="adge badge-light" href="mailto:service@itmob.com">service@itmob.com</a>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p>{{p.event_place}}</p>
+                <p><b>{{getOnlyTime(p.event_date)}}</b></p>
+            </td>
+            <td>
+                <button type="button" ng-show = "!isAuthor(p) && p.isfollow" class="btn btn-danger" ng-click="deleteFollowToEvent(p)">Отписаться</button>
+                <button type="button" ng-show="isAuthor(p)" class="btn btn-light" ng-click="deleteEventById(p)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <script src="profile.js"></script>
 </body>
 </html>
+

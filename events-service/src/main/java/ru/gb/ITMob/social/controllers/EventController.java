@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import ru.gb.ITMob.social.services.EventTypesService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/events")
@@ -26,14 +27,14 @@ public class EventController {
     private final EventMembersService eventMembersService;
     private final EventConverter eventConverter;
 
-    private final EventTypesService eventTypesService;
-
     @GetMapping
     public PageDto<EventDto> findEvents(
             @RequestParam(required = false, name = "title") String title,
             @RequestParam(required = false, name = "event_types_name") List<String> event_types_name,
             @RequestParam(required = false, name = "event_place") String event_place,
-            @RequestParam(required = false, name = "username") String username, @RequestParam(defaultValue = "1", name = "p") Integer page) {
+            @RequestParam(required = false, name = "username") String username,
+            @RequestParam(required = false, name = "isfollow") Boolean isfollow,
+            @RequestParam(defaultValue = "1", name = "p") Integer page) {
 
         if (page < 1) {
             page = 1;
@@ -79,8 +80,8 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEventById(@PathVariable long id) {
-        eventService.deleteById(id);
+    public void deleteEventById(@PathVariable long id, @RequestParam(name = "username") String username) {
+        eventService.deleteById(id, username);
     }
 
 }

@@ -5,10 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.transaction.annotation.Transactional;
 import ru.gb.ITMob.social.dtos.EventDto;
 import ru.gb.ITMob.social.entities.Event;
+import ru.gb.ITMob.social.entities.EventMembers;
 import ru.gb.ITMob.social.entities.EventTypes;
 import ru.gb.ITMob.social.exceptions.ResourceNotFoundException;
+import ru.gb.ITMob.social.repositories.EventMembersRepository;
 import ru.gb.ITMob.social.repositories.EventRepository;
 import ru.gb.ITMob.social.repositories.specifications.EventSpecifications;
 import ru.gb.ITMob.social.validators.EventValidator;
@@ -21,6 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventService {
     private final EventRepository eventRepository;
+    private final EventMembersService eventMembersService;
 
     private final EventValidator eventValidator;
 
@@ -34,11 +38,18 @@ public class EventService {
         return eventRepository.findById(id);
     }
 
-    public void deleteById(Long id){
+    @Transactional
+    public void deleteById(Long id, String username){
+        String title_id = new StringBuilder().append(id).toString();
+        for (EventMembers p : eventMembersService.findByTitleAndUsername(title_id, username)) {
+            eventMembersService.deleteById(p.getId());
+        }
         eventRepository.deleteById(id);
     }
 
+    @Transactional
     public Event createNewEvent(EventDto eventDto) {
+
         eventValidator.validate(eventDto);
         Event event = new Event();
         event.setId(eventDto.getId());
@@ -50,6 +61,9 @@ public class EventService {
         EventTypes e = eventTypesService.findByName(eventDto.getEvent_types_name()).orElseThrow(() -> new ResourceNotFoundException("Тип события не найден"));
         event.setEvent_types_id(e);
         eventRepository.save(event);
+
+        eventMembersService.createEventMembers(event, eventDto.getAuthor());
+
         return event;
     }
 
