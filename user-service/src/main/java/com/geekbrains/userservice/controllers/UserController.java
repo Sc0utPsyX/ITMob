@@ -16,7 +16,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/auth")
+    @PostMapping("/auth")
     @ResponseStatus(HttpStatus.OK)
     public AuthResponse authenticate(@RequestBody AuthRequest authRequest) {
         return userService.authenticate(authRequest);
@@ -71,5 +71,22 @@ public class UserController {
         return userService.deleteUser(userId, token);
     }
 
+    @PutMapping("/privacy")
+    @ResponseStatus(HttpStatus.OK)
+    public void changePrivacySettings(
+            @RequestHeader(name = "authorization") String token,
+            @RequestBody PrivacySettingDto privacySettingDto
+    )
+    {
+        userService.changePrivacySettings(token, privacySettingDto);
+    }
+
+    @GetMapping("/privacy")
+    public PrivacySettingDto getPrivacySettings(
+            @RequestHeader(name = "authorization") String token
+    )
+    {
+        return userService.getPrivacySetting(token);
+    }
 
 }

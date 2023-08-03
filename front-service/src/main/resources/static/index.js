@@ -18,6 +18,38 @@
                 templateUrl: 'register/register.html',
                 controller: 'registerController'
             })
+            .when('/profile', {
+                templateUrl: 'profile/profile.html',
+                controller: 'profileController'
+            })
+            .when('/events', {
+                templateUrl: 'events/events.html',
+                controller: 'eventsController'
+            })
+            .when('/events-card', {
+                templateUrl: 'events-card/events-card.html',
+                controller: 'eventsCardController'
+            })
+            .when('/privacy', {
+                templateUrl: 'privacy_setting/privacy.html',
+                controller: 'privacyController'
+            })
+            .when('/agreement', {
+                templateUrl: 'agreement/agreement.html',
+                controller: 'agreementController'
+            })
+            .when('/confidentiality', {
+                templateUrl: 'confidentiality/confidentiality.html',
+                controller: 'confidentialityController'
+            })
+            .when('/contact', {
+                templateUrl: 'contact/contact.html',
+                controller: 'contactController'
+            })
+            .when('/aboutNet', {
+                templateUrl: 'about-net/about-net.html',
+                controller: 'aboutNetController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
@@ -45,12 +77,12 @@ function run($rootScope, $http, $localStorage) {
 
 angular.module('socialnetwork').controller('mainController', function ($rootScope, $scope, $http, $location, $localStorage) {
 
-    const contextPath = 'http://localhost:8191/front/';
+   const contextPath = 'http://localhost:8191/front/';
 
    $scope.loadMenuList = function () {
         $http.get(contextPath + 'api/v1/menu_list').then(function (response) {
             $scope.menuList = response.data;
-            console.log(response.data);
+            //console.log(response.data);
        });
      }
 

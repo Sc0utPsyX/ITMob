@@ -24,4 +24,7 @@ public class MenuList {
     @Column(name = "href")
     private String href;
 
+    @Column(name = "visibility")
+    private boolean visibility;
+
 }

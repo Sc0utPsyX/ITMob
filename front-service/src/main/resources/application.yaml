@@ -2,3 +2,17 @@ server:
   port: 8191
   servlet:
     context-path: /front
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5434/it_mob_front
+    username: user
+    password: pass
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: true
+  flyway:
+    enabled: true

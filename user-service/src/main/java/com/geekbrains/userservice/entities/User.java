@@ -10,9 +10,8 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
 @Entity
-@Table(schema = "itmob", name = "users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -33,9 +32,12 @@ public class User {
     @JoinColumn(name = "id")
     private UserDetails userDetails;
 
+    @OneToOne
+    @JoinColumn(name = "privacy_setting_id")
+    private PrivacySetting privacySetting;
+
     @ManyToMany
     @JoinTable(
-            schema = "itmob",
             name = "user_rights",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "right_id")
@@ -112,6 +114,11 @@ public class User {
 
         public User.Builder setActive(boolean active) {
             User.this.active = active;
+            return this;
+        }
+
+        public User.Builder setPrivacySetting(PrivacySetting privacySetting) {
+            User.this.privacySetting = privacySetting;
             return this;
         }
 

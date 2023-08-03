@@ -12,6 +12,7 @@ public class MenuListDto {
     private String name;
     private String photo_link;
     private String href;
+    private boolean visibility;
 
 }
 
