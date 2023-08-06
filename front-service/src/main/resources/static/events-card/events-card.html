@@ -25,25 +25,25 @@
         </div>
     </form>
     <p></p>
-    <form novalidate ng-submit="eventCreate()">
+    <form ng-submit="eventCreate()">
         <div class="form-floating input-group-sm">
-            <label for="eventTitle">Название события:</label>
-            <input type="text" class="form-control" id="eventTitle" placeholder="" ng-model="event.title">
+            <label for="eventTitle" class="form-label">Название события:</label>
+            <input type="text" class="form-control" id="eventTitle" placeholder=" " ng-model="event.title" required>
         </div>
         <p></p>
         <div class="form-floating input-group-sm">
-            <label for="eventDescription">Описание события:</label>
-            <input type="text" class="form-control" id="eventDescription" placeholder="" ng-model="event.description">
+            <label for="eventDescription" class="form-label">Описание события:</label>
+            <input type="text" class="form-control" id="eventDescription" placeholder=" " ng-model="event.description" required>
         </div>
         <p></p>
         <div class="form-floating input-group-sm">
             <label for="eventEventData">Дата проведения события:</label>
-            <input type="date" class="form-control" id="eventEventData" placeholder="" ng-model="event.event_data">
+            <input type="date" class="form-control" id="eventEventData" placeholder="" ng-model="event.event_data" required>
         </div>
         <p></p>
         <div class="form-floating input-group-sm">
-            <label for="eventEvent_place">Город:</label>
-            <input type="text" class="form-control" id="eventEvent_place" placeholder="" ng-model="event.event_place">
+            <label for="eventEvent_place" class="form-label">Город:</label>
+            <input type="text" class="form-control" id="eventEvent_place" placeholder=" " ng-model="event.event_place" required>
         </div>
         <p></p>
         <button type="submit" class="btn btn-secondary">Создать событие</button>
